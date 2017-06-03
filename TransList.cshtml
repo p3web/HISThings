@@ -1,0 +1,628 @@
+@using TSSN.FTE.Insurance.Web.Common.Extentions;
+@model TSSN.FTE.Insurance.DTO.SearchTransDto
+@{
+    ViewBag.Title = "لیست هزینه ها";
+}
+
+@section contents {
+    @Styles.Render("~/Content/datatable")
+    <link href="~/Content/PersianDatePicker.min.css" rel="stylesheet" />
+    @Styles.Render("~/Content/fileinput")
+    <style>
+        .hide_column {
+            display: none;
+        }
+    </style>
+
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="page-title-box" style="height:40px;padding-top:9px;">
+            <ol class="breadcrumb pull-left">
+                <li><a href="#">هزینه ها</a></li>
+                <li class="active">ثبت هزینه</li>
+            </ol>
+            @*<h4 class="page-title">فرم ثبت هزینه</h4>*@
+        </div>
+    </div>
+</div>
+
+@Html.Partial(MVC.Shared.Views._ModalPartial)
+
+@Html.Partial(MVC.Shared.Views._DeleteConfirmModal)
+
+<div class="row">
+    <div class="col-sm-12">
+        @*<div class="filter-box">
+                <button aria-controls="show-search" aria-expanded="false" class="btn btn-search waves-effect waves-light btn-block" data-target="#show-search" data-toggle="collapse" type="button">
+                    <i class="fa fa-search"></i>
+                    جهت تنظیم گزینه های جستجو کلیک کنید
+                </button>
+            </div>*@
+        <div id="PGrid" class="card-box table-responsive">
+            @*@Html.Partial("_SearchTrans", Model)*@
+            @*<a href="#" data-loading-text="Loading..." class="lnkCreate btn btn-primary w-lg waves-effect waves-light m-b-5 create" style="margin-bottom:20px;"><i class="fa  fa-plus btn-icon"></i> ثبت هزینه جدید</a>
+                <table id="datatable" class="table table-striped table-bordered table-hover">
+                    <thead class="bordered-primary">
+                        <tr>
+                            <th style="display:none"></th>
+                            <th>
+                                کد ملی بیمار
+                            </th>
+                            <th>
+                                نام و نام خانوادگی بیمار
+                            </th>
+                            <th>
+                                کد ملی پرسنل
+                            </th>
+                            <th>
+                                نام و نام خانوادگی پرسنل
+                            </th>
+                            <th>
+                                نوع هزینه
+                            </th>
+                            <th>
+                                نسبت
+                            </th>
+                            <th>
+                                تاریخ هزینه
+                            </th>
+                            <th>
+                                مبلغ هزینه (ریال)
+                            </th>
+                            <th>
+
+                            </th>
+                        </tr>
+                    </thead>
+                </table>*@
+
+
+
+        </div>
+    </div>
+</div>
+
+@section scripts {
+
+    <script src="~/Scripts/PersianDatePicker.min.js"></script>
+    @Scripts.Render("~/bundles/datatable")
+    @Scripts.Render("~/bundle/core-app")
+    @Scripts.Render("~/bundles/autocomplete")
+    @Scripts.Render("~/bundles/bootstrap-fileinput")
+    <script>
+        //____ this JSON come from Controller !!!
+        var JSONTEST = [
+     { id: '1', nationalCode: '0014237520', name: 'پوریا', personalCode: '25', personalName: 'حسن حسینی', transMode: 'نوع اول', relation: 'پدر', date: '20/2/1386', amount: '2000' },
+     { id: '2', nationalCode: '0125445520', name: 'پریسا', personalCode: '250', personalName: 'حسن حسینی', transMode: 'نوع اول', relation: 'پدر', date: '20/2/1386', amount: '2000' },
+     { id: '3', nationalCode: '5648220558', name: 'پرنیان', personalCode: '255', personalName: 'حسن حسینی', transMode: 'نوع اول', relation: 'پدر', date: '20/2/1386', amount: '2000' },
+     { id: '4', nationalCode: '8256122358', name: 'پاشا', personalCode: '215', personalName: 'حسن حسینی', transMode: 'نوع اول', relation: 'پدر', date: '20/2/1386', amount: '2000' },
+     { id: '5', nationalCode: '2546872002', name: 'پیمان', personalCode: '285', personalName: 'حسن حسینی', transMode: 'نوع اول', relation: 'پدر', date: '20/2/1386', amount: '2000' },
+     { id: '6', nationalCode: '0214789852', name: 'پوران', personalCode: '259', personalName: 'حسن حسینی', transMode: 'نوع اول', relation: 'پدر', date: '20/2/1386', amount: '2000' },
+     { id: '7', nationalCode: '0014558762', name: 'پویا', personalCode: '251', personalName: 'حسن حسینی', transMode: 'نوع اول', relation: 'پدر', date: '20/2/1386', amount: '2000' },
+     { id: '8', nationalCode: '0013254895', name: 'پانیز', personalCode: '254', personalName: 'حسن حسینی', transMode: 'نوع اول', relation: 'پدر', date: '20/2/1386', amount: '2000' },
+     { id: '9', nationalCode: '0058974652', name: 'پارسا', personalCode: '255', personalName: 'حسن حسینی', transMode: 'نوع اول', relation: 'پدر', date: '20/2/1386', amount: '2000' },
+     { id: '10', nationalCode: '0012359876', name: 'پروانه', personalCode: '025', personalName: 'حسن حسینی', transMode: 'نوع اول', relation: 'پدر', date: '20/2/1386', amount: '2000' },
+     { id: '11', nationalCode: '0012354720', name: 'حمید', personalCode: '255', personalName: 'حسن حسینی', transMode: 'نوع اول', relation: 'پدر', date: '20/2/1386', amount: '2000' },
+     { id: '12', nationalCode: '0012235687', name: 'حامد', personalCode: '265', personalName: 'حسن حسینی', transMode: 'نوع اول', relation: 'پدر', date: '20/2/1386', amount: '2000' },
+     { id: '13', nationalCode: '0013454872', name: 'محمود', personalCode: '275', personalName: 'حسن حسینی', transMode: 'نوع اول', relation: 'پدر', date: '20/2/1386', amount: '2000' },
+     { id: '14', nationalCode: '5542300125', name: 'حمزه', personalCode: '259', personalName: 'حسن حسینی', transMode: 'نوع اول', relation: 'پدر', date: '20/2/1386', amount: '2000' },
+     { id: '15', nationalCode: '0012354852', name: 'حمیرا', personalCode: '285', personalName: 'حسن حسینی', transMode: 'نوع اول', relation: 'پدر', date: '20/2/1386', amount: '2000' },
+     { id: '16', nationalCode: '0213548500', name: 'محمد', personalCode: '256', personalName: 'حسن حسینی', transMode: 'نوع اول', relation: 'پدر', date: '20/2/1386', amount: '2000' },
+     { id: '17', nationalCode: '0123549852', name: 'محرم', personalCode: '258', personalName: 'حسن حسینی', transMode: 'نوع اول', relation: 'پدر', date: '20/2/1386', amount: '2000' },
+        ];
+
+        //____ this code set In View :
+        var grid = new PSCO_grid('grid');
+        grid.cols = [
+            { name: 'id', thname: 'شناسه', hidden: true, searchMode: 'select' },
+            { name: 'CompanyName', thname: 'نام شرکت', hidden: true},
+            { name: 'Description', thname: 'توضیحات', hidden: true },
+            { name: 'FileNumber',hidden: true },
+            { name: 'FormattedTransAmount',hidden: true },
+            { name: 'InsuredTypeId',hidden: true },
+            { name: 'InsuredTypeTitle',hidden: true },
+            { name: 'LetterDate',hidden: true },
+               { name: 'LetterNumber',hidden: true },
+               { name: 'MainName',thname: 'نام', hidden: false, type: 'text' },
+               { name: 'MainNationalCode', thname: 'کدملی بیمار', hidden: false, type: 'text' },
+               { name: 'PageCount', hidden: true },
+               { name: 'PatientName', thname: 'نام پرسنل', hidden: false, type: '' },
+            { name: 'PatientNationalCode', thname: 'کدملی پرسنل', hidden: false, type: 'text' },
+            { name: 'RelationId', hidden: true},
+        { name: 'RelationTitle', thname: 'نسبت', hidden: false, type: '' },
+            { name: 'RowNumber', hidden: true},
+            { name: 'TariffCategoryId', hidden: true},
+            { name: 'TariffCategoryTitle',  thname: '????', hidden: false, type: 'text' },
+               { name: 'TransAmount',  thname: 'مبلغ', hidden: false, type: 'text' },
+            { name: 'TransDate',  hidden: true },
+        { name: 'TransDateFa', thname: 'تاریخ', hidden: false, type: '' },
+        { name: 'TransId', hidden: true }
+        ];
+        grid.button = [
+            { name: 'افزودن', attribute: { name: 'onclick', value: "alert('add')" } },
+        ];
+        grid.actions = [
+            { name: 'delete', ClassName: 'glyphicon glyphicon-remove', attribute: [{ name :'onclick' , value : 'deleteIt(this)' } ]},
+                { name: 'edit', ClassName: 'glyphicon glyphicon-edit', attribute: { onclick: 'edit()' } }
+        ];
+
+        function deleteIt(elem){
+            var TransID = grid.get_field_of_row(elem , 'TransId'); // ___ getTrans Id
+            ajax.sender_data_json_by_url_callback('/Trans/Delete' , {transId : TransID} , console.log , "POST");
+        }
+
+
+        var firstList = {
+            CompanyInsuranceId: @Model.CompanyInsuranceId,
+            TariffCategoryId: @Model.TariffCategoryId,
+            TransDate: "",
+            PatientNationalCode:'' ,
+            MainNationalCode: '',
+            PatientName: "",
+            MainName: ""
+
+        };
+        function SetGrid(data) {
+            grid.data = data.Items;
+            grid.render();
+        }
+        ajax.sender_data_json_by_url_callback('/Trans/GetCreatedTransList' ,  firstList , SetGrid);
+
+        //function test() {
+
+        //    $.ajax({
+        //        url: "/Trans/GetCreatedTransList",
+        //        type: "GET",
+        //        dataType: "json",
+        //        data: {
+        //            CompanyInsuranceId: 0,
+        //            TariffCategoryId: 0,
+        //            TransDate: "0",
+        //            PatientNationalCode: "",
+        //            MainNationalCode: "",
+        //            PatientName: "",
+        //            MainName: ""
+        //        },
+        //        success: function (data) {
+        //            alert("success!");
+        //        }
+        //    });
+        //}
+
+       // test();
+
+    </script>
+    @*<script type="text/javascript">
+
+            // #region Datatable
+
+            var oTable = $('#datatable').DataTable({
+                "bFilter": false,
+                "bLengthChange": false,
+                "bProcessing": true,
+                "bServerSide": true,
+                "sAjaxSource": '@Url.Action(MVC.Trans.ActionNames.GetCreatedTransList, MVC.Trans.Name)',
+                "sServerMethod": "GET",
+                "fnServerData": function (sSource, aoData, fnCallback, oSettings) {
+                    oSettings.jqXHR = $.ajax({
+                        "dataType": 'json',
+                        "type": "POST",
+                        "url": sSource,
+                        "data": aoData,
+                        "success": function (data) {
+                            //hideLoading();
+                            if (data == false) {
+                                errorNotify('خطا در پردازش اطلاعات رخ داده است.')
+                            }
+                            else
+                                fnCallback(data);
+                        }
+                    });
+                },
+                "fnServerParams": function (aoData) {
+                    var CompanyInsuranceId = $("#searchTransForm #CompanyInsuranceId").val();
+                    var tariffCategoryId = $("#searchTransForm #TariffCategoryId").val();
+                    var transDate = $("#searchTransForm #TransDate").val();
+                    var patientNationalCode = $("#searchTransForm #PatientNationalCode").val();
+                    var mainNationalCode = $("#searchTransForm #MainNationalCode").val();
+                    var patientName = $("#searchTransForm #PatientName").val();
+                    var mainName = $("#searchTransForm #MainName").val();
+
+                    aoData.push({ name: "CompanyInsuranceId", value: CompanyInsuranceId });
+                    aoData.push({ name: "TariffCategoryId", value: tariffCategoryId });
+                    aoData.push({ name: "TransDate", value: transDate });
+                    aoData.push({ name: "PatientNationalCode", value: patientNationalCode });
+                    aoData.push({ name: "MainNationalCode", value: mainNationalCode });
+                    aoData.push({ name: "PatientName", value: patientName });
+                    aoData.push({ name: "MainName", value: mainName });
+                },
+                //"iDisplayLength": 10,
+                "aaSorting": [[0, 'desc']],
+                "sDom": "Tflt<'row DTTTFooter'<'col-sm-6'i><'col-sm-6'p>>",
+                "language": {
+                    "lengthMenu": "نمایش _MENU_ رکورد در صفحه",
+                    "zeroRecords": "رکوردی یافت نشد",
+                    "info": "نمایش _START_ تا _END_ از _TOTAL_ رکورد",
+                    "infoEmpty": "",
+                    "paginate": {
+                        "first": "اول",
+                        "last": "آخر",
+                        "next": "بعدی",
+                        "previous": "قبلی"
+                    },
+                },
+
+                "aoColumns": [
+                        { className: "farsi-digit hide_column", "mDataProp": "TransId" },
+                        { className: "farsi-digit", "mDataProp": "PatientNationalCode" },
+                        { "mDataProp": "PatientName" },
+                        { className: "farsi-digit", "mDataProp": "MainNationalCode" },
+                        { "mDataProp": "MainName" },
+                        { "mDataProp": "TariffCategoryTitle" },
+                        { "mDataProp": "RelationTitle", "sWidth": "5%" },
+                        { className: "farsi-digit", "mDataProp": "TransDateFa" },
+                        { className: "farsi-digit", "mDataProp": "FormattedTransAmount" },
+                        {
+                            "sWidth": "10%",
+                            "mData": null,
+                            "bSortable": false,
+                            "mRender": function (data, type, full) {
+                                var CompanyInsuranceId = 6;
+                                //$("#searchTransForm #CompanyInsuranceId").val();
+                                var itemID = data.Id;
+                                var transId = full.TransId;
+                                return '<a href="' + '@Url.Action(MVC.Trans.ActionNames._Edit, MVC.Trans.Name)' + '?companyInsuranceId=' + CompanyInsuranceId + '&transId=' + full.TransId + '" data-loading-text="Loading..." class="lnkEdit edit"><i class="fa fa-edit edit-row"></i> </a>' +
+                                       '<a href="#" class="lnkDelete delete"><i class="fa fa-trash-o remove-row" data-toggle="modal" data-target="#delete-confirm"></i> </a>' +
+                                       '<a href="' + '@Url.Action(MVC.Trans.ActionNames._EditTransDocument, MVC.Trans.Name)' + '?transId=' + full.TransId + '" data-trans-id="' + full.TransId + '" data-loading-text="Loading..." class="lnkEditDocument edit"><i class="fa fa-upload upload-row"></i> </a>'
+
+
+                            }
+                        }
+                ]
+            });
+            //#endregion
+
+            //#region Delete
+            function closeDeleteTrans() {
+                $('#delete-confirm').modal('hide');
+            }
+
+            $('#btnDelete').click(function (e) {
+                e.preventDefault();
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action(MVC.Trans.ActionNames.Delete, MVC.Trans.Name)',
+                    data: {
+                        transId: transId,
+                    },
+                    success: function (data) {
+                        //hideLoading();
+                        if (data.success) {
+                            closeDeleteTrans();
+                            refreshTable();
+                            successNotify('حذف اطلاعات با موفقیت انجام شد.')
+                        }
+                        else {
+
+                            errorNotify('اشکال در حذف اطلاعات، لطفا مجددا تلاش نمایید')
+                        }
+                    },
+                    error: function (data) {
+                        errorNotify('اشکال در حذف اطلاعات، لطفا مجددا تلاش نمایید')
+                    }
+                });
+            });
+            // #endregion
+
+            // #region User Date
+
+            var userData = [];
+            function getUserDate(CompanyInsuranceId) {
+                $.ajax({
+                    url: '@Url.Action(MVC.Trans.ActionNames.GetCompanyUsers, MVC.Trans.Name)' + '?companyInsuranceId=' + CompanyInsuranceId,
+                    type: "GET",
+                    dataType: "json",
+                    async: false,
+                    success: function (data) {
+                        userData = data;
+                    }
+                });
+            }
+            getUserDate($("#searchTransForm #CompanyInsuranceId").val());
+
+            $(document).on("focus", ".autoNames", function (e) {
+                if (!$(this).data("autocomplete")) {
+                    $(this).autocomplete({
+                        lookup: userData,
+                        formatResult: function (suggestion, currentValue) {
+                            // Do not replace anything if there current value is empty
+                            if (!currentValue) {
+                                return suggestion.value;
+                            }
+
+                            var pattern = currentValue.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&") + ')';
+
+                            // removed <strong> highlight
+                            return suggestion.value
+                                .replace(/&/g, '&amp;')
+                                .replace(/</g, '&lt;')
+                                .replace(/>/g, '&gt;')
+                                .replace(/"/g, '&quot;');
+                        },
+                        //serviceUrl: '/Trans/GetCompanyUsers',
+                        onSelect: function (suggestion) {
+                            $(".mainName").val(suggestion.data.MainName);
+                            $(".mainNationalCode").val(suggestion.data.MainNationalCode);
+                            $(".patientNationalCode").val(suggestion.data.PatientNationalCode);
+                            $(".userInsuranceId").val(suggestion.data.UserInsuranceId);
+                        }
+                    });
+                }
+            });
+
+            // #endregion
+
+            // #region refreshTable
+            function refreshTable() {
+                var table = $('#datatable').DataTable();
+                table.ajax.reload();
+            }
+            // #endregion
+
+            // #region Filter
+            $(document).on("click", ".trans-search-button", function (event) {
+                refreshTable();
+            });
+
+            $(document).on("click", ".trans-remove-filtr", function (event) {
+                $("#searchTransForm #TariffCategoryId").val('');
+                $("#searchTransForm #TransDate").val('');
+                $("#searchTransForm #PatientNationalCode").val('');
+                $("#searchTransForm #MainNationalCode").val('');
+                $("#searchTransForm #PatientName").val('');
+                $("#searchTransForm #MainName").val('');
+
+                refreshTable();
+            });
+            // #endregion
+
+            //#region change-CompanyInsuranceId
+            $("#searchTransForm #CompanyInsuranceId").change(function (e) {
+                var compInsue = $("#searchTransForm #CompanyInsuranceId").val();
+                getUserDate(compInsue);
+                getTariffCategoryData(compInsue);
+
+            });
+            //#endregion
+
+            //#region getTariffCategoryData
+            var getTariffCategoryData = function (companyInsuranceId) {
+                var procemessage = "<option value='0'> لطفا منتظر بمانید...</option>";
+                $("#searchTransForm #TariffCategoryId").html(procemessage).show();
+                var url = '@Url.Action(MVC.Trans.ActionNames.GetCompanyTariffCategoryList, MVC.Trans.Name)';
+                $.ajax({
+                    url: url + "?companyInsuranceId=" + companyInsuranceId,
+                    type: "GET",
+                    dataType: "json",
+                    async: false,
+                    success: function (data) {
+                        var markup = "<option value='0'></option>";
+                        for (var x = 0; x < data.length; x++) {
+                            markup += "<option value=" + data[x].Id + ">" + data[x].Title + "</option>";
+                        }
+                        $("#searchTransForm #TariffCategoryId").html(markup).show();
+                    }
+                });
+            }
+
+
+            //#region Create
+            $(".lnkCreate").click(function (e) {
+                var url = "";
+                e.preventDefault();
+
+                var CompanyInsuranceId = $("#searchTransForm #CompanyInsuranceId").val();
+
+                if (CompanyInsuranceId == "") {
+                    warningNotify('هیچ شرکتی جهت ثبت هزینه انتخاب نشده است');
+                }
+                else {
+                    url = '@Url.Action(MVC.Trans.ActionNames._Create, MVC.Trans.Name)' + '?compnayInsuranceId=' + CompanyInsuranceId,
+                    setModalTitle('ایجاد هزینه');
+                    showLoading();
+                    $("#modalbody").load(url, function () {
+                        hideLoading();
+                        ShowModal();
+                    });
+                }
+            });
+
+            $(document).on("submit", ".createTrans", function (e) {
+                e.preventDefault();
+                var $form = $(this);
+                var $target = $("#modalbody");
+
+                $.ajax({
+                    type: $form.attr('method'),
+                    url: $form.attr('action'),
+                    data: $form.serialize(),
+
+                    success: function (data, status) {
+
+                        if (data.success == true) {
+                            HideModal();
+                            successNotify('اطلاعات با موفقیت ذخیره شد');
+                            refreshTable();
+                        }
+                        else if (data.success == false) {
+                            //HideModal();
+                            var err = data.error.allReplace({ '\n': '<br>' });
+                            errorNotify(err);
+                            //refreshTable();
+                        }
+                        else {
+                            $target.html(data);
+                            $.validator.unobtrusive.parse($form);
+                        }
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+
+                    }
+                });
+            });
+            // #endregion
+
+            // #region Edit
+            $("#datatable").on("click", ".lnkEdit", function (e) {
+                e.preventDefault();
+                url = $(this).attr('href');
+                showLoading();
+                setModalTitle('ویرایش هزینه');
+                $("#modalbody").load(url, function () {
+                    hideLoading();
+                    ShowModal();
+                });
+            });
+
+            $(document).on("submit", ".editTrans", function (e) {
+                e.preventDefault();
+                var $form = $(this);
+                var $target = $("#modalbody");
+
+                $.ajax({
+                    type: $form.attr('method'),
+                    url: $form.attr('action'),
+                    data: $form.serialize(),
+
+                    success: function (data, status) {
+
+                        if (data.success == true) {
+                            hideLoading();
+                            successNotify('اطلاعات با موفقیت ویرایش شد')
+                            refreshTable();
+                        }
+                        else if (data.error == true) {
+                            hideLoading();
+                            errorNotify('اشکال در ویرایش اطلاعات، لطفا مجددا تلاش نمایید')
+                            refreshTable();
+                        }
+                        //else {
+                        //    HideModal();
+                        //    $target.html(data);
+                        //    bootbox.dialog({
+                        //        message: $target.html(),
+                        //        title: "ایجاد هزینه",
+                        //        className: "modal-darkorange"
+                        //    });
+                        //    $.validator.unobtrusive.parse($form);
+                        //}
+                    }
+                });
+            });
+            //#endregion
+
+            //#region TransDocument
+
+            var initPrev = [];
+            var initPrevConfig = [];
+            function getTransDocumentDetails(transId) {
+
+                initPrev = [];
+                initPrevConfig = [];
+
+                $.ajax({
+                    type: "GET",
+                    url: "@Url.Action(MVC.Document.ActionNames.GetTransDocumentDetail, MVC.Document.Name)",
+                    data: { transId: transId },
+                    async: false,
+                    success: function (data, status) {
+                        if (data.success != false) {
+                            initPrevConfig.push({ type: "pdf", caption: data.result.Name, size: data.result.Size, showDelete: false });
+                            initPrev.push('@Url.Action(MVC.Document.ActionNames.DownloadPDF, MVC.Document.Name)?transId=' + transId);
+                        }
+                    }
+                });
+            }
+
+
+            $(document).on("click", ".lnkEditDocument", function (e) {
+
+                showLoading();
+                e.preventDefault();
+                var id = $(this).data('transId');
+                url = $(this).attr('href');
+                setModalTitle('بارگزاری مدارک');
+
+                $("#modalbody").load(url, function () {
+                    getTransDocumentDetails(id);
+                    hideLoading();
+                    ShowModal();
+                    var $input = $(".document-file");
+                    $input.fileinput({
+                        uploadUrl: '@Url.Action(MVC.Document.ActionNames.CreateTransDocument, MVC.Document.Name)',
+                        language: "fa",
+                        uploadAsync: false,
+                        allowedFileTypes: ["pdf"],
+                        autoReplace: true,
+                        maxFileCount: 1,
+                        overwriteInitial: true,
+                        showUploadedThumbs: false,
+                        initialPreview: initPrev,
+                        initialPreviewAsData: true, // identify if you are sending preview data only and not the raw markup
+                        initialPreviewFileType: 'pdf', // image is the default and can be overridden in config below
+                        initialPreviewConfig: initPrevConfig,
+                        //initialPreviewShowDelete: false,
+                        showRemove: false,
+                        showClose: false,
+                        showUpload: false,
+                        layoutTemplates: { actionDelete: '' }, // disable thumbnail deletion
+                        dropZoneEnabled: false,
+                        deleteUrl: '@Url.Action(MVC.Document.ActionNames.DeleteDocument, MVC.Document.Name)?transId=' + id,
+                        maxFileSize: 10000,
+                        browseClass: "btn btn-success"
+                    })
+                    .on("filebatchselected", function (event, files) {
+                        // trigger upload method immediately after files are selected
+                        $input.fileinput("upload");
+                    });
+
+                    $("#kvFileinputModal").detach().appendTo('.bootbox .modal');
+
+                    hideLoading();
+                });
+            });
+
+            $(document).on("submit", ".editTransDocument", function (e) {
+                e.preventDefault();
+                var $form = $(this);
+
+                $.ajax({
+                    type: $form.attr('method'),
+                    url: $form.attr('action'),
+                    data: $form.serialize(),
+
+                    success: function (data, status) {
+                        if (data.success == true) {
+                            hideLoading();
+                            HideModal();
+                            successNotify('اطلاعات با موفقیت ویرایش شد');
+                            refreshTable();
+                        }
+                        else if (data.success == false) {
+                            hideLoading();
+                            HideModal();
+                            errorNotify(data.error);
+                        }
+                    }
+                });
+            });
+
+
+
+            //#endregion
+        </script>*@
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+}
+
