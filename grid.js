@@ -17,11 +17,16 @@ function PSCO_grid(name) {
     this.paging_row_count = 10;
     this.currentPage = 1;
     this.SearchcurrentPage = 1;
+    this.RowIDName = undefined;
+    //////////
     this.find_in_server = false;
     this.server_finder_function = undefined;
+    this.serverPaging = undefined; //____ numberOfData
+    this.serverPagingfuncName = undefined; //____ onclick FuncName
+
+
 
     this.render = function () {
-
         var Container = document.getElementById(this.ContainerID);
         Container.classList.add('PGrid');
 
@@ -228,7 +233,7 @@ function PSCO_grid(name) {
 
 
 
-            //_______ search 
+            //_______ search
             //TODO: create colaps of finder on table header
             //TODO: set function on
             if (this.find_in_server) {
@@ -302,58 +307,8 @@ function PSCO_grid(name) {
 
                 // TODO: set rows and filling the table
                 var tbody = document.createElement('tbody');
-                this.rows = [];
-                for (i = 0; i < this.data.length; i++) {
-                    try {
 
-                        var row = {}; //____ set this.Data in This.Row
-                        var Data = this.data[i];
-                        var DataKeys = Object.keys(Data); //____ get Cols key
-
-                        for (a = 0; a < DataKeys.length; a++) {
-                            row[DataKeys[a]] = Data[DataKeys[a]]; //____ set cols
-                        }
-                        this.rows.push(row);
-                        /*  tr = document.createElement('tr'); //___ set tr
-                         tr.setAttribute('id', 'tr_' + this.data[i].id); //___set tr id
-                         tr.setAttribute('onclick', "SelectedThisRow(this)"); //___set tr Selected function
-
-                         var Data = this.data[i];
-                         var DataKeys = Object.keys(Data); //____ get Cols key
-
-                         for (a = 0; a < DataKeys.length; a++) {
-
-                         row[DataKeys[a]] = Data[DataKeys[a]]; //____ set cols
-
-                         td = document.createElement('td');
-
-                         if (this.cols[a].hidden != undefined && this.cols[a].hidden == true) { //________ if hidden is true !
-                         td.style.display = 'none';
-                         }
-
-                         var ColsType = col_type(this.cols[a].type); //____ type of cols
-                         if (ColsType != 'Text') {
-                         try {
-                         //____ for checkbox or RADIO cols
-                         if (this.RightToLeft == true) {
-                         ColsType.style.float = 'right';
-                         } else {
-                         ColsType.style.float = 'left';
-                         }
-                         var inputlabel = document.createElement('label');
-                         inputlabel.innerText = Data[DataKeys[a]];
-                         inputlabel.append(ColsType);
-                         td.appendChild(inputlabel); //____ set element in td
-                         } catch (er) {
-                         }
-                         } else {
-                         td.innerText = Data[DataKeys[a]]; //____ set text of td
-                         }
-                         tr.appendChild(td);
-                         }*/
-                    } catch (err) {
-                    }
-                }
+                this.setRow();
 
                 var baseIndex = (this.currentPage - 1) * this.paging_row_count;
                 for (i = baseIndex; i < baseIndex + this.paging_row_count; i++) {
@@ -370,7 +325,11 @@ function PSCO_grid(name) {
             Container.appendChild(table);
 
             //_______ create paging of the grid
-            if (this.rows != undefined && this.rows != null && this.rows.length > this.paging_row_count) {
+            if (this.serverPaging != undefined) {
+                BtnDivider = this.createPaging(this.serverPaging);
+                Container.appendChild(BtnDivider);
+            }
+            else if (this.rows != undefined && this.rows != null && this.rows.length > this.paging_row_count) {
                 /*                var pageBtn_number = this.data.length / this.paging_row_count;
                  if (!Number.isInteger(pageBtn_number)) {
                  pageBtn_number = parseInt(pageBtn_number) + 1;
@@ -529,12 +488,20 @@ function PSCO_grid(name) {
 
 
     //____ Create tr for Grid
-    //var trCreateorCounter = (this.currentPage - 1) * this.paging_row_count;
-    var trCreateor = function (DataRow, cols, RightToLeft, class_name, ActionDivider, rowIndex) {
-        //  trCreateorCounter++;
+
+    var trCreateor = function (DataRow, cols, RightToLeft, class_name, ActionDivider, rowIndex , i) {
+
         var tr = document.createElement('tr'); //___ set tr
-        tr.setAttribute('id', 'tr_' + DataRow.id); //___set tr id
-        tr.setAttribute('data-Rowid', 'tr_' + rowIndex); //___set tr id
+        if (class_name.RowIDName == undefined) {
+            tr.setAttribute('id', 'tr_' + DataRow.id); //___set tr id
+        } else {
+            tr.setAttribute('id', 'tr_' + DataRow[class_name.RowIDName]); //___set tr id
+        }
+        if (i == null) {
+            tr.setAttribute('data-Rowid', 'tr_' + rowIndex); //___set tr id
+        } else {
+            tr.setAttribute('data-Rowid', 'tr_' + i); //___set tr id
+        }
         tr.setAttribute('onclick', class_name + ".SelectedThisRow(this,'" + class_name + "')"); //___set tr Selected function
 
         var Data = DataRow;
@@ -615,8 +582,36 @@ function PSCO_grid(name) {
         }
     };
 
+    //______ for ServerSide paging
+    this.create_otherPageRows = function (data, className) {
+        var Tbody = document.querySelectorAll('#' + this.ContainerID + '_table > tbody'); // ____ get Tbody
+        Tbody[0].innerHTML = '';
+        this.data = data;
+        this.setRow();
+        var numberOfrow = (this.currentPage - 1) * this.paging_row_count;
+        for (var i = 0; i < this.rows.length; i++) {
+            try {
+
+                var ActionDivider = actionCreator(this.actions);
+                var tr = trCreateor(this.rows[i], this.cols, this.RightToLeft, this.name, ActionDivider, numberOfrow, i);
+                numberOfrow++;
+            } catch (er) {
+            }
+            Tbody[0].appendChild(tr);
+        }
+
+    }
+
+    //_____ for server Paging set DataNumb (this.serverpaging)
     this.createPaging = function (data, btnDividerId, searchMode) {
-        var pageBtn_number = data.length / this.paging_row_count;
+        var pageBtn_number;
+
+        if (!isNaN(data)) {
+            pageBtn_number = data / this.paging_row_count; //____ for server Paging
+        } else {
+
+            pageBtn_number = data.length / this.paging_row_count;
+        }
         if (!Number.isInteger(pageBtn_number)) {
             pageBtn_number = parseInt(pageBtn_number) + 1;
         }
@@ -632,15 +627,23 @@ function PSCO_grid(name) {
         for (i = 0; i < pageBtn_number; i++) {
             var btn = document.createElement('span');
             btn.setAttribute('class', 'btn btn-primary');
-            if (searchMode == null) {
-                btn.setAttribute('onclick', this.name + '.GoToPage(' + (i + 1) + " , '" + this.name + "')");
+
+            if (isNaN(data)) { //____ if not server Paging ...
+                if (searchMode == null) {
+                    btn.setAttribute('onclick', this.name + '.GoToPage(' + (i + 1) + " , '" + this.name + "')");
+                } else {
+                    btn.setAttribute('onclick', this.name + '.GoToPage(' + (i + 1) + " , '" + this.name + "' , 'search')");
+                }
             } else {
-                btn.setAttribute('onclick', this.name + '.GoToPage(' + (i + 1) + " , '" + this.name + "' , 'search')");
+                btn.setAttribute('onclick', this.serverPagingfuncName + "('" + (i + 1) + "')");
             }
+
             btn.innerText = i + 1;
             BtnDivider.appendChild(btn);
         }
+
         return BtnDivider;
+
     };
     /*    this.searchResult = function () {
      var Tbody = document.querySelectorAll('#' + this.ContainerID + '_table > tbody'); // ____ get Tbody
@@ -655,6 +658,24 @@ function PSCO_grid(name) {
      }
 
      };*/
+    this.setRow = function () {
+
+        this.rows = [];
+        for (i = 0; i < this.data.length; i++) {
+            try {
+
+                var row = {}; //____ set this.Data in This.Row
+                var Data = this.data[i];
+                var DataKeys = Object.keys(Data); //____ get Cols key
+
+                for (a = 0; a < DataKeys.length; a++) {
+                    row[DataKeys[a]] = Data[DataKeys[a]]; //____ set cols
+                }
+                this.rows.push(row);
+            } catch (err) {
+            }
+        }
+    }
 
     this.FastSearch = function (class_name) {
         //var classes = get_class_pointer(class_name);
