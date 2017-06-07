@@ -18,8 +18,10 @@ function PSCO_grid(name) {
     this.currentPage = 1;
     this.SearchcurrentPage = 1;
     this.RowIDName = undefined;
+
     //////////
     this.find_in_server = false;
+    this.serverSerch = undefined;
     this.server_finder_function = undefined;
     this.serverPaging = undefined; //____ numberOfData
     this.serverPagingfuncName = undefined; //____ onclick FuncName
@@ -105,14 +107,14 @@ function PSCO_grid(name) {
             //______ search Divider
             var FastSearchDivider = document.createElement('div');
             FastSearchDivider.setAttribute('class', 'col-xs-3 pull-left');
-            FastSearchDivider.setAttribute('id', this.name + 'FastSearchDivider');
+            FastSearchDivider.setAttribute('id', this.ContainerID + 'FastSearchDivider');
 
             // _____ collapse Btn
             var collapseBtn = document.createElement('span');
             collapseBtn.setAttribute('class', 'btn btn-primary btn-block');
             collapseBtn.setAttribute('data-toggle', 'collapse');
-            collapseBtn.setAttribute('data-target', '#collapse' + this.name);
-            collapseBtn.setAttribute('aria-controls', 'collapse' + this.name);
+            collapseBtn.setAttribute('data-target', '#collapse' + this.ContainerID);
+            collapseBtn.setAttribute('aria-controls', 'collapse' + this.ContainerID);
             collapseBtn.setAttribute('aria-expanded', 'false');
 
             var colapseIcon = document.createElement('i');
@@ -145,7 +147,7 @@ function PSCO_grid(name) {
             colapseDivider.setAttribute('class', 'col-xs-12');
             var collapse = document.createElement('div');
             collapse.setAttribute('class', 'collapse');
-            collapse.setAttribute('id', 'collapse' + this.name);
+            collapse.setAttribute('id', 'collapse' + this.ContainerID);
             var wellDiv = document.createElement('div');
             wellDiv.setAttribute('class', 'well');
             var formInline = document.createElement('div');
@@ -222,6 +224,8 @@ function PSCO_grid(name) {
 
             accepetFilterBtn.setAttribute('class', 'btn btn-small btn-success');
             cancelFilterBtn.setAttribute('class', 'btn btn-small btn-danger');
+
+            accepetFilterBtn.setAttribute('onclick', this.serverSerch + '()');
             accepetFilterBtn.appendChild(accepetFilterIcon);
             accepetFilterBtn.innerHTML += 'اعمال فیلتر';
 
@@ -489,7 +493,7 @@ function PSCO_grid(name) {
 
     //____ Create tr for Grid
 
-    var trCreateor = function (DataRow, cols, RightToLeft, class_name, ActionDivider, rowIndex , i) {
+    var trCreateor = function (DataRow, cols, RightToLeft, class_name, ActionDivider, rowIndex, i) {
 
         var tr = document.createElement('tr'); //___ set tr
         if (class_name.RowIDName == undefined) {

@@ -1,4 +1,20 @@
+//------ Global
+function searchOnserver() {
+    var inputs = document.querySelectorAll('#collapsePGrid input:checked');
+    var param = {}
+    for (var i = 0 ; i < inputs.length ; i++) {
+        var key = inputs[i].getAttribute('data-id');
+        var value = document.getElementById(key).value;
+        param[key] = value;
+    }
+    param['StartIndex'] = 0;
+    param['PageSize'] = 2;
+    ///////Temp
+    Trans.transEntry.grid.currentPage = 1;
+    Trans.transEntry.gridParam.StartIndex = 0;
+    ajax.sender_data_json_by_url_callback('/Trans/GetCreatedTransList', param , Trans.transEntry.setSearchingData);
 
+}
 //_________ Transaction Functions
 var Trans = {
     transEntry: {
@@ -37,7 +53,7 @@ Trans.transEntry.setGrid = function () {
         { name: 'TransDateFa', thname: 'تاریخ', hidden: false, type: '' },
         { name: 'TransId', hidden: true }
     ];
-
+    Trans.transEntry.grid.serverSerch = 'searchOnserver';
     Trans.transEntry.grid.button = [
         { name: 'افزودن', attribute: { name: 'onclick', value: "alert('add')" } },
     ];
@@ -58,10 +74,7 @@ Trans.transEntry.setGrid = function () {
          MainName: "",*/
         StartIndex: 2,
         PageSize: 2,
-        SortedColumns: {
-            Direction: 'desc',
-            PropertyName: 'TransAmount'
-        }
+
     };
     Trans.transEntry.grid.paging_row_count = 2;
 
@@ -77,6 +90,11 @@ Trans.transEntry.GoToPage = function (pageNum) {
 Trans.transEntry.setPagingData = function (data) {
     Trans.transEntry.grid.create_otherPageRows(data.Items);
 }
+//_______ search Func
+Trans.transEntry.setSearchingData = function (data) {
+    Trans.transEntry.grid.serverPaging = data.TotalCount;
+    Trans.transEntry.grid.create_otherPageRows(data.Items);
+}
 // ______ set Grid Data
 Trans.transEntry.SetGridData=function(data) {
     Trans.transEntry.grid.data = data.Items;
@@ -88,3 +106,4 @@ Trans.transEntry.deleteIt = function (elem) {
     var TransID = Trans.transEntry.grid.get_field_of_row(elem, 'TransId'); // ___ getTrans Id
     ajax.sender_data_json_by_url_callback('/Trans/Delete', { transId: TransID }, console.log, "POST");
 }
+
