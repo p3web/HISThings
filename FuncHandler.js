@@ -1,4 +1,26 @@
 //------ Global
+function sorteBy(elem) {
+    var PropertyName = elem.getAttribute('data-name');
+    var SortDirection = elem.getAttribute('data-sortDir');
+    if (SortDirection == null) {
+        SortDirection = 'Ascending';
+    }
+    if (SortDirection == 'Ascending') {
+        elem.setAttribute('data-sortDir', 'Descending');
+    } else {
+        elem.setAttribute('data-sortDir', 'Ascending');
+    }
+    Trans.transEntry.gridParam.current['SortedColumns'] = [
+        {
+            Direction: SortDirection,
+            PropertyName: PropertyName
+
+        }
+    ]
+
+    ajax.sender_data_json_by_url_callback('/Trans/GetCreatedTransList', Trans.transEntry.gridParam.current , Trans.transEntry.setSearchingData, 'POST');
+
+}
 function searchOnserver() {
     var inputs = document.querySelectorAll('#collapsePGrid input:checked');
     var param = {}
@@ -12,14 +34,17 @@ function searchOnserver() {
     ///////Temp
     Trans.transEntry.grid.currentPage = 1;
     Trans.transEntry.gridParam.StartIndex = 0;
-    ajax.sender_data_json_by_url_callback('/Trans/GetCreatedTransList', param , Trans.transEntry.setSearchingData);
+    ajax.sender_data_json_by_url_callback('/Trans/GetCreatedTransList', param, Trans.transEntry.setSearchingData , 'POST');
 
 }
 //_________ Transaction Functions
 var Trans = {
     transEntry: {
         grid: {},
-        gridParam : {}
+        gridParam: {
+            first:{},
+            current:{}
+        }
     }
 }
 
@@ -53,39 +78,39 @@ Trans.transEntry.setGrid = function () {
         { name: 'TransDateFa', thname: 'تاریخ', hidden: false, type: '' },
         { name: 'TransId', hidden: true }
     ];
+    Trans.transEntry.grid.serverSorted = 'sorteBy';
     Trans.transEntry.grid.serverSerch = 'searchOnserver';
     Trans.transEntry.grid.button = [
         { name: 'افزودن', attribute: { name: 'onclick', value: "alert('add')" } },
     ];
 
     Trans.transEntry.grid.actions = [
-        { name: 'delete', ClassName: 'glyphicon glyphicon-remove', attribute: [{ name: 'onclick', value: 'Trans.transEntry.deleteIt(this)' }] },
-        { name: 'edit', ClassName: 'glyphicon glyphicon-edit', attribute: { onclick: 'edit()' } }
+        { name: 'delete', ClassName: 'glyphicon glyphicon-remove', attribute: [{ name: 'onclick', value: 'Trans.transEntry.deleteIt(this)' }] }
+        // { name: 'edit', ClassName: 'glyphicon glyphicon-edit', attribute: { onclick: 'edit()' } }
     ];
 
     Trans.transEntry.grid.serverPagingfuncName = 'Trans.transEntry.GoToPage';
-    Trans.transEntry.gridParam = {
-        /*CompanyInsuranceId: @Model.CompanyInsuranceId,
-         TariffCategoryId: @Model.TariffCategoryId,
-         TransDate: "",
-         PatientNationalCode:'' ,
-         MainNationalCode: '',
-         PatientName: "",
-         MainName: "",*/
-        StartIndex: 2,
-        PageSize: 2,
 
+    Trans.transEntry.gridParam.first = Trans.transEntry.gridParam.current = {
+        StartIndex: 0,
+        PageSize: 2,
+        //SortedColumns:[
+        //    {
+        //        Direction: 'Ascending',
+        //        PropertyName: 'TransAmount'
+        //    }
+        //]
     };
     Trans.transEntry.grid.paging_row_count = 2;
 
-    ajax.sender_data_json_by_url_callback('/Trans/GetCreatedTransList', Trans.transEntry.gridParam , Trans.transEntry.SetGridData);
+    ajax.sender_data_json_by_url_callback('/Trans/GetCreatedTransList', Trans.transEntry.gridParam.first, Trans.transEntry.SetGridData ,'POST');
 
 }
 //________ Paging func
 Trans.transEntry.GoToPage = function (pageNum) {
     Trans.transEntry.grid.currentPage = pageNum;
-    Trans.transEntry.gridParam.StartIndex = pageNum - 1;
-    ajax.sender_data_json_by_url_callback('/Trans/GetCreatedTransList', Trans.transEntry.gridParam, Trans.transEntry.setPagingData);
+    Trans.transEntry.gridParam.current.StartIndex = (pageNum - 1) * Trans.transEntry.gridParam.current.PageSize;
+    ajax.sender_data_json_by_url_callback('/Trans/GetCreatedTransList', Trans.transEntry.gridParam.current, Trans.transEntry.setPagingData, 'POST');
 }
 Trans.transEntry.setPagingData = function (data) {
     Trans.transEntry.grid.create_otherPageRows(data.Items);
@@ -96,7 +121,7 @@ Trans.transEntry.setSearchingData = function (data) {
     Trans.transEntry.grid.create_otherPageRows(data.Items);
 }
 // ______ set Grid Data
-Trans.transEntry.SetGridData=function(data) {
+Trans.transEntry.SetGridData = function (data) {
     Trans.transEntry.grid.data = data.Items;
     Trans.transEntry.grid.serverPaging = data.TotalCount;
     Trans.transEntry.grid.render();

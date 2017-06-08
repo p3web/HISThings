@@ -20,11 +20,12 @@ function PSCO_grid(name) {
     this.RowIDName = undefined;
 
     //////////
+    this.serverSorted = undefined;
     this.find_in_server = false;
     this.serverSerch = undefined;
     this.server_finder_function = undefined;
     this.serverPaging = undefined; //____ numberOfData
-    this.serverPagingfuncName = undefined; //____ onclick FuncName
+    this.serverPagingfuncName = undefined; //____ onclick FuncName 
 
 
 
@@ -237,7 +238,7 @@ function PSCO_grid(name) {
 
 
 
-            //_______ search
+            //_______ search 
             //TODO: create colaps of finder on table header
             //TODO: set function on
             if (this.find_in_server) {
@@ -267,11 +268,21 @@ function PSCO_grid(name) {
                 tr.appendChild(cols);
                 for (i = 0; i < this.cols.length; i++) {
                     cols = document.createElement('th'); // ___ set th
+                    cols.setAttribute('data-name', this.cols[i].name); // for sort by ...
                     try {
-                        if (this.cols[i].thname != null || this.cols[i].thname != '') {
-                            cols.innerText = this.cols[i].thname; // ___ set th name
+
+                        var sorteIcon = document.createElement('i'); // sort Icon
+                        sorteIcon.setAttribute('class', 'glyphicon glyphicon-sort');
+                        cols.appendChild(sorteIcon);
+
+                        if (this.serverSorted != undefined && this.serverSorted != null) { // sort function on server !
+                            cols.setAttribute('onclick', this.serverSorted + '(this)');
+                        }
+
+                        if (this.cols[i].thname != null && this.cols[i].thname != '' && this.cols[i].thname != undefined) {
+                            cols.innerHTML += this.cols[i].thname; // ___ set th name
                         } else {
-                            cols.innerText = this.cols[i].name; // ___ set th name
+                            cols.innerHTML += this.cols[i].name; // ___ set th name
                         }
 
                     } catch (er) {

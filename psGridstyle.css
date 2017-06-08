@@ -1,0 +1,41 @@
+
+.PGrid th {
+    text-align: center;
+}
+.PGrid th i{
+    font-size: 10px;
+    margin: 3px;
+    color: #a9a9a9;
+}
+.PGrid input {
+    margin: 5px;
+}
+
+.PGrid .page-divider {
+    max-width: 50%;
+}
+
+.PGrid .page-divider span {
+    margin: 5px;
+}
+
+.PGrid .form-group {
+    max-width: 45%;
+}
+
+.PGrid .form-group input[type=text] {
+    max-width: 80%;
+}
+.PGrid .fastSearch{
+    max-width: 70%;
+    display: inline-block;
+}
+.PGrid .btn-search{
+    max-width: 45%;
+    display: inline-block;
+    margin-top:0;
+}
+.Pointer{
+    cursor: pointer;
+}
+
