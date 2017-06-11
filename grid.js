@@ -18,14 +18,14 @@ function PSCO_grid(name) {
     this.currentPage = 1;
     this.SearchcurrentPage = 1;
     this.RowIDName = undefined;
-
+    this.DatePickerFunc = undefined;
     //////////
     this.serverSorted = undefined;
     this.find_in_server = false;
     this.serverSerch = undefined;
     this.server_finder_function = undefined;
     this.serverPaging = undefined; //____ numberOfData
-    this.serverPagingfuncName = undefined; //____ onclick FuncName 
+    this.serverPagingfuncName = undefined; //____ onclick FuncName
 
 
 
@@ -184,6 +184,12 @@ function PSCO_grid(name) {
                         inputText = document.createElement('input');
                         inputText.setAttribute('type', 'text');
                         inputText.setAttribute('onkeyup', 'check(this)');
+                        try{
+                            if (this.cols[i].searchMode.toLowerCase() == 'datepicker' && this.DatePickerFunc != undefined) {
+                                inputText.setAttribute('onclick' , this.DatePickerFunc);
+                            }
+                        }catch(err){}
+
                         inputText.setAttribute('placeholder', this.cols[i].thname);
                     }
 
@@ -238,7 +244,7 @@ function PSCO_grid(name) {
 
 
 
-            //_______ search 
+            //_______ search
             //TODO: create colaps of finder on table header
             //TODO: set function on
             if (this.find_in_server) {
@@ -624,7 +630,6 @@ function PSCO_grid(name) {
         if (!isNaN(data)) {
             pageBtn_number = data / this.paging_row_count; //____ for server Paging
         } else {
-
             pageBtn_number = data.length / this.paging_row_count;
         }
         if (!Number.isInteger(pageBtn_number)) {

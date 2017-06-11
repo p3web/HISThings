@@ -10,7 +10,9 @@
 .PGrid input {
     margin: 5px;
 }
-
+.PGrid select{
+    padding : 0 ;
+}
 .PGrid .page-divider {
     max-width: 50%;
 }

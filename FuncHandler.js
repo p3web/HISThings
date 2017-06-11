@@ -1,4 +1,14 @@
 //------ Global
+function fillSelect(SelectTagID, data, selectedID) {
+    var DataKeys = Object.keys(data);
+    var option = '';
+    for (var i = 0; i < DataKeys.length; i++) {
+        option += '<option value="' + data[DataKeys[i]].value + '">' + data[DataKeys[i]].name + '</option>';
+    }
+    SelectTagID = document.getElementById(SelectTagID);
+    SelectTagID.innerHTML = option;
+    SelectTagID.value = selectedID;
+}
 function sorteBy(elem) {
     var PropertyName = elem.getAttribute('data-name');
     var SortDirection = elem.getAttribute('data-sortDir');
@@ -14,11 +24,10 @@ function sorteBy(elem) {
         {
             Direction: SortDirection,
             PropertyName: PropertyName
-
         }
     ]
 
-    ajax.sender_data_json_by_url_callback('/Trans/GetCreatedTransList', Trans.transEntry.gridParam.current , Trans.transEntry.setSearchingData, 'POST');
+    ajax.sender_data_json_by_url_callback('/Trans/GetCreatedTransList', Trans.transEntry.gridParam.current, Trans.transEntry.setSearchingData, 'POST');
 
 }
 function searchOnserver() {
@@ -34,7 +43,7 @@ function searchOnserver() {
     ///////Temp
     Trans.transEntry.grid.currentPage = 1;
     Trans.transEntry.gridParam.StartIndex = 0;
-    ajax.sender_data_json_by_url_callback('/Trans/GetCreatedTransList', param, Trans.transEntry.setSearchingData , 'POST');
+    ajax.sender_data_json_by_url_callback('/Trans/GetCreatedTransList', param, Trans.transEntry.setSearchingData, 'POST');
 
 }
 //_________ Transaction Functions
@@ -42,8 +51,8 @@ var Trans = {
     transEntry: {
         grid: {},
         gridParam: {
-            first:{},
-            current:{}
+            first: {},
+            current: {}
         }
     }
 }
@@ -54,8 +63,8 @@ Trans.transEntry.setGrid = function () {
     Trans.transEntry.grid = new PSCO_grid('Trans.transEntry.grid');
     Trans.transEntry.grid.RowIDName = 'TransId';
     Trans.transEntry.grid.cols = [
-        { name: 'id', thname: 'شناسه', hidden: true, searchMode: 'select' },
-        { name: 'CompanyName', thname: 'نام شرکت', hidden: true },
+        { name: 'id', thname: 'شناسه', hidden: true },
+        { name: 'CompanyName', thname: 'نام شرکت', hidden: true, searchMode: 'select' },
         { name: 'Description', thname: 'توضیحات', hidden: true },
         { name: 'FileNumber', hidden: true },
         { name: 'FormattedTransAmount', hidden: true },
@@ -78,6 +87,7 @@ Trans.transEntry.setGrid = function () {
         { name: 'TransDateFa', thname: 'تاریخ', hidden: false, type: '' },
         { name: 'TransId', hidden: true }
     ];
+    Trans.transEntry.grid.DatePickerFunc = "PersianDatePicker.Show(this, '"++"')"
     Trans.transEntry.grid.serverSorted = 'sorteBy';
     Trans.transEntry.grid.serverSerch = 'searchOnserver';
     Trans.transEntry.grid.button = [
@@ -86,24 +96,18 @@ Trans.transEntry.setGrid = function () {
 
     Trans.transEntry.grid.actions = [
         { name: 'delete', ClassName: 'glyphicon glyphicon-remove', attribute: [{ name: 'onclick', value: 'Trans.transEntry.deleteIt(this)' }] }
-        // { name: 'edit', ClassName: 'glyphicon glyphicon-edit', attribute: { onclick: 'edit()' } }
     ];
 
     Trans.transEntry.grid.serverPagingfuncName = 'Trans.transEntry.GoToPage';
 
     Trans.transEntry.gridParam.first = Trans.transEntry.gridParam.current = {
+        CompanyInsuranceId: SelectedCompanyID,
         StartIndex: 0,
         PageSize: 2,
-        //SortedColumns:[
-        //    {
-        //        Direction: 'Ascending',
-        //        PropertyName: 'TransAmount'
-        //    }
-        //]
     };
     Trans.transEntry.grid.paging_row_count = 2;
 
-    ajax.sender_data_json_by_url_callback('/Trans/GetCreatedTransList', Trans.transEntry.gridParam.first, Trans.transEntry.SetGridData ,'POST');
+    ajax.sender_data_json_by_url_callback('/Trans/GetCreatedTransList', Trans.transEntry.gridParam.first, Trans.transEntry.SetGridData, 'POST');
 
 }
 //________ Paging func
@@ -125,6 +129,7 @@ Trans.transEntry.SetGridData = function (data) {
     Trans.transEntry.grid.data = data.Items;
     Trans.transEntry.grid.serverPaging = data.TotalCount;
     Trans.transEntry.grid.render();
+    fillSelect('CompanyName', company, SelectedCompanyID);
 }
 //______ DeleteTrans
 Trans.transEntry.deleteIt = function (elem) {
