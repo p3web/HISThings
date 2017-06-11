@@ -1,0 +1,103 @@
+﻿@model TSSN.FTE.Insurance.DTO.SearchUserInsuranceDto
+@using TSSN.FTE.Insurance.Web.Infrastructure.Extensions
+
+<form id="searchInsured">
+    <div class="row collapse" id="show-search">
+        <div class="col-md-12">
+            <div class="well">
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="BirthCertificateNumber">
+                                نام شرکت
+                            </label>
+                            @if (User.IsBroker() || User.IsAdmin() || User.IsEvaluatorExpert())
+                            {
+                                @Html.DropDownListFor(m => m.CompanyInsuranceId, new SelectList(Model.Companies, "CompanyInsuranceId", "CompanyName"), "", new { @class = "form-control company-list" })
+                            }
+                            else if (User.IsUser() || User.IsCompany())
+                            {
+                                @Html.DropDownListFor(m => m.CompanyInsuranceId, new SelectList(Model.Companies, "CompanyInsuranceId", "CompanyName"), "", new { @class = "form-control company-list", @style = "width:100%; padding-right:0px;", @disabled = "disabled" })
+                            }
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="PatientNationalCode">
+                                کد ملی بیمار
+                            </label>
+                            @Html.TextBoxFor(m => m.PatientNationalCode, new { @class = " form-control", maxlength = "50" })
+                            @Html.ValidationMessageFor(m => m.PatientNationalCode, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-2" style="padding-right:0">
+                        <div class="form-group">
+                            <label for="MainNationalCode">
+                                کد ملی بیمه شده ی اصلی
+                            </label>
+                            @Html.TextBoxFor(m => m.MainNationalCode, new { @class = " form-control", maxlength = "50" })
+                            @Html.ValidationMessageFor(m => m.MainNationalCode, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-3" style="padding-right:0">
+                        <div class="form-group">
+                            <label for="PatientName">
+                                نام بیمار
+                            </label>
+                            @Html.TextBoxFor(m => m.PatientName, new { @class = " form-control", maxlength = "50" })
+                            @Html.ValidationMessageFor(m => m.PatientName, "", new { @class = "text-danger" })
+
+                        </div>
+                    </div>
+                    <div class="col-md-3" style="padding-right:0">
+                        <div class="form-group">
+                            <label for="MainName">
+                                نام بیمه شده ی اصلی
+                            </label>
+                            @Html.TextBoxFor(m => m.MainName, new { @class = " form-control", maxlength = "50" })
+                            @Html.ValidationMessageFor(m => m.MainName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="pull-left">
+                            <button type="button" class="btn btn-sm btn-filter insured-search-button"
+                                    id="transSearchButton" autocomplete="off" data-loading-text="منتظر بمانید...">
+                                <i class="fa fa-filter"></i>
+                                اعمال فیلتر
+                            </button>
+                            <button aria-controls="show-search" aria-expanded="false" id="removeFilter"
+                                    class="btn btn-remove-filter insured-remove-filtr btn-sm" type="button">
+                                <i class="fa fa-times"></i>
+                                لغو فیلتر
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+
+</form>
+@this.ScriptBlock(
+    @<script type="text/javascript">
+        $(document).ready(function () {
+            var select2Instance = $(".company-list").select2({
+                placeholder: "یک شرکت را انتخاب نمایید ...",
+                //allowClear: true,
+                dir: "rtl",
+                dropdownParent: $('div.well'),
+            });
+        });
+    </script>
+)

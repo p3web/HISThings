@@ -1,0 +1,52 @@
+﻿@model TSSN.FTE.Insurance.DTO.EditTransDto
+<div id="horizontal-form">
+    @using (Html.BeginForm(MVC.Trans.ActionNames.EditTransDocument, MVC.Trans.Name, FormMethod.Post, new { @class = "form-horizontal editTransDocument" }))
+    {
+        @Html.HiddenFor(m => m.TransId);
+        @Html.HiddenFor(m => m.RowVersion);
+        @Html.AntiForgeryToken()
+        @*@Html.ValidationSummary(true, "", new { @class = "text-danger" })*@
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="PatientName" class="col-sm-4 control-label">نام و نام خانوادگی</label>
+                    <div class="col-sm-8">
+                        @Html.TextBoxFor(m => m.PatientName, new { @readonly = "readonly", @class = "form-control bg-lightgray" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="PatientNationalCode" class="col-sm-4 control-label">کد ملی بیمار</label>
+                    <div class="col-sm-8">
+                        @Html.TextBoxFor(x => x.PatientNationalCode, new { @readonly = "readonly", @class = "form-control bg-lightgray font-num" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="NoHazinehId" class="col-sm-4 control-label">نوع هزینه</label>
+                    <div class="col-sm-8">
+                        @Html.TextBoxFor(x => x.TariffCategoryTitle, new { @readonly = "readonly", @class = "form-control bg-lightgray font-num" })
+                        @Html.ValidationMessageFor(m => m.TariffCategoryId, "", new { @class = "text-danger" })
+                    </div>
+
+                </div>
+            </div>
+        </div>    
+
+        <hr style="margin-top:0" />
+
+        <input id="input-id" type="file" class="document-file">
+
+            <div class="row form-footer" style="margin-top:20px">
+            <div class="col-sm-12">
+                <button type="submit" class="btn btn-primary waves-effect waves-light btnEditTransDocument"> <i class="fa fa-save m-r-5"></i> <span>تایید</span> </button>
+
+                <button class="btn btn-default waves-effect" data-dismiss="modal"><i class="fa fa-ban m-r-5"></i> <span>انصراف</span></button>
+            </div>
+        </div>
+   }
+</div>
+

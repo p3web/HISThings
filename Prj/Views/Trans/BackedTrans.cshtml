@@ -1,0 +1,649 @@
+﻿@using TSSN.FTE.Insurance.Web.Common.Extentions;
+@model TSSN.FTE.Insurance.DTO.SearchTransDto
+@{
+    ViewBag.Title = "List";
+}
+
+@section contents {
+    @Styles.Render("~/Content/datatable")
+    <link href="~/Content/PersianDatePicker.min.css" rel="stylesheet" />
+    <link href="~/plugins/bootstrap-sweetalert/sweet-alert.css" rel="stylesheet" type="text/css" />
+    <style>
+        .hide_column {
+            display: none;
+        }
+    </style>
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="page-title-box" style="height:40px;padding-top:9px;">
+            <ol class="breadcrumb pull-left">
+                <li><a href="#">هزینه ها</a></li>
+                <li class="active">کسری مدارک</li>
+            </ol>
+            @*<h4 class="page-title">فرم ثبت هزینه</h4>*@
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="TransModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document" style="width:55%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                @*<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>*@
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">ایجاد هزینه</h4>
+            </div>
+            <div class="modal-body" id="ModalDiv">
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="TransModalEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document" style="width:55%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                @*<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>*@
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">ویرایش هزینه</h4>
+            </div>
+            <div class="modal-body" id="ModalDivEdit">
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="ModalEditDocument" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document" style="width:55%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                @*<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>*@
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">اطلاعات کاربر</h4>
+            </div>
+            <div class="modal-body" id="ModalDivEditDocument">
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="confirm-send" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">هشدار</h4>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-warning">
+                    <strong>توجه! </strong>  پس از ارسال هزینه ها، امکان ویرایش وجود ندارد.
+                </div>
+                <div>آیا از ارسال هزینه های اننخابی اطمینان دارید؟</div>
+
+            </div>
+            <div class="modal-footer">
+                <button id="btnConfirmSend" type="button" class="btn btn-primary">ارسال</button>
+                <button data-dismiss="modal" type="button" class="btn btn-default">انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="delete-trans" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">هشدار</h4>
+            </div>
+            <div class="modal-body" id="modaldelete">
+                <div class="alert alert-danger">
+                    <strong>توجه! </strong>  پس از حذف هزینه ها، امکان برگرداندن وجود ندارد.
+                </div>
+                <div>آیا از حذف رکورد مورد نظر مطمئن هستید؟</div>
+
+            </div>
+            <div class="modal-footer">
+                <button id="btnDelete" type="button" class="btn btn-primary">حذف</button>
+                <button data-dismiss="modal" type="button" class="btn btn-default">انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="filter-box">
+            <button aria-controls="show-search" aria-expanded="false" class="btn btn-search waves-effect waves-light btn-block" data-target="#show-search" data-toggle="collapse" type="button">
+                <i class="fa fa-search"></i>
+                جهت تنظیم گزینه های جستجو کلیک کنید
+            </button>
+        </div>
+        <div class="card-box table-responsive">
+            @Html.Partial("_SearchTrans", Model)
+            <button id="sendBackTrans" type="button" class="btn btn-primary w-lg waves-effect waves-light m-b-5" data-toggle="modal" data-target="#confirm-send"><i class="fa fa-mail-forward btn-icon"  data-toggle="modal" data-target="#delete-trans"></i>ارسال هزینه برگشتی</button>
+
+            <table id="datatable" class="table table-striped table-bordered table-hover">
+                <thead class="bordered-primary">
+                    <tr>
+                        <th style="width:30px;">
+
+                            <div class="checkbox checkbox-primary checkbox-single">
+                                <input type="checkbox" aria-label="Single checkbox One">
+                                <label></label>
+                            </div>
+                        </th>
+
+                        <th style="display:none"></th>
+                        <th>
+                            کد ملی بیمار
+                        </th>
+                        <th>
+                            نام و نام خانوادگی بیمار
+                        </th>
+                        <th>
+                            کد ملی پرسنل
+                        </th>
+                        <th>
+                            نام و نام خانوادگی پرسنل
+                        </th>
+                        <th>
+                            نوع هزینه
+                        </th>
+                        <th>
+                            نسبت
+                        </th>
+                        <th>
+                            تاریخ هزینه
+                        </th>
+                        <th>
+                            مبلغ هزینه (ریال)
+                        </th>
+                        <th>
+
+                        </th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+
+    <script src="~/Scripts/PersianDatePicker.min.js"></script>
+    @Scripts.Render("~/bundles/datatable")
+    @Scripts.Render("~/bundle/core-app")
+    @Scripts.Render("~/bundles/autocomplete")
+    <script src="~/plugins/bootstrap-sweetalert/sweet-alert.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            // #region datatable
+
+            var oTable = $('#datatable').DataTable({
+                "bFilter": false,
+                "bLengthChange": false,
+                "bProcessing": true,
+                "bServerSide": true,
+                //"deferLoading": 0,
+                "sAjaxSource": '@Url.Action(MVC.Trans.ActionNames.GetBackedTransList, MVC.Trans.Name)',
+                "sServerMethod": "GET",
+                "fnServerData": function (sSource, aoData, fnCallback, oSettings) {
+                    //showLoading();
+                    oSettings.jqXHR = $.ajax({
+                        "dataType": 'json',
+                        "type": "POST",
+                        "url": sSource,
+                        "data": aoData,
+                        "success": function (data) {
+                            //hideLoading();
+                            if (data == false) {
+                                //$("div.alert-danger").empty().append("خطا در پردازش اطلاعات رخ داده است.").fadeIn(300).delay(3000).fadeOut(400);
+                            }
+                            else
+                                fnCallback(data);
+                        }
+                    });
+                },
+                "fnServerParams": function (aoData) {
+                    var CompanyInsuranceId = $("#searchTransForm #CompanyInsuranceId").val();
+                    var tariffCategoryId = $("#searchTransForm #TariffCategoryId").val();
+                    var transDate = $("#searchTransForm #TransDate").val();
+                    var patientNationalCode = $("#searchTransForm #PatientNationalCode").val();
+                    var mainNationalCode = $("#searchTransForm #MainNationalCode").val();
+                    var patientName = $("#searchTransForm #PatientName").val();
+                    var mainName = $("#searchTransForm #MainName").val();
+
+                    aoData.push({ name: "CompanyInsuranceId", value: CompanyInsuranceId });
+                    aoData.push({ name: "TariffCategoryId", value: tariffCategoryId });
+                    aoData.push({ name: "TransDate", value: transDate });
+                    aoData.push({ name: "PatientNationalCode", value: patientNationalCode });
+                    aoData.push({ name: "MainNationalCode", value: mainNationalCode });
+                    aoData.push({ name: "PatientName", value: patientName });
+                    aoData.push({ name: "MainName", value: mainName });
+                },
+                "aaSorting": [[1, 'desc']],
+                "sDom": "Tflt<'row DTTTFooter'<'col-sm-6'i><'col-sm-6'p>>",
+                "language": {
+                    "lengthMenu": "نمایش _MENU_ رکورد در صفحه",
+                    "zeroRecords": "رکوردی یافت نشد",
+                    "info": "نمایش _START_ تا _END_ از _TOTAL_ رکورد",
+                    "infoEmpty": "",
+                    "paginate": {
+                        "first": "اول",
+                        "last": "آخر",
+                        "next": "بعدی",
+                        "previous": "قبلی"
+                    },
+                },
+                "aoColumns": [
+                    {
+                        "width": "20px",
+                        "searchable": false,
+                        "orderable": false,
+                        "mDataProp": "Checked",
+                        "mRender": function (data, type, full) {
+                            return '<div class="checkbox checkbox-primary checkbox-single">' +
+                                   '<input type="checkbox" id="singleCheckbox1" value="option1" aria-label="Single checkbox One">' +
+                                   '<label></label>' +
+                           ' </div>'
+                        },
+                        className: "dt-body-center"
+                    },
+
+                    { className: "farsi-digit hide_column", "mDataProp": "TransId" },
+                    { className: "farsi-digit", "mDataProp": "PatientNationalCode" },
+                    { "mDataProp": "PatientName" },
+                    { className: "farsi-digit", "mDataProp": "MainNationalCode" },
+                    { "mDataProp": "MainName" },
+                    { "mDataProp": "TariffCategoryTitle" },
+                    { "mDataProp": "RelationTitle" },
+                    { className: "farsi-digit", "mDataProp": "TransDateFa" },
+                    { className: "farsi-digit", "mDataProp": "FormattedTransAmount" },
+                    {
+                        "sWidth": "15%",
+                        "mData": null,
+                        "bSortable": false,
+                        "mRender": function (data, type, full) {
+                            var CompanyInsuranceId = $("#searchTransForm #CompanyInsuranceId").val();
+                            return '<a href="' + '@Url.Action(MVC.Trans.ActionNames._Edit, MVC.Trans.Name)' + '?companyInsuranceId=' + CompanyInsuranceId + '&transId=' + full.TransId + '" data-loading-text="Loading..." class="lnkEdit edit"><i class="fa fa-edit edit-row"></i> </a>' +
+                                   '<a href="' + '#' +  '" data-loading-text="Loading..." class="lnkDelete delete"><i class="fa fa-trash-o remove-row" data-toggle="modal" data-target="#delete-trans"></i> </a>' +
+                                   '<a href="' + '@Url.Action(MVC.Trans.ActionNames._EditTransDocument, MVC.Trans.Name)' + '?transId=' + full.TransId + '" data-loading-text="Loading..." class="lnkEditDocument edit"><i class="fa fa-upload upload-row"></i> </a>'
+
+                        }
+                    }
+                ]
+            });
+            // #endregion
+        });
+
+        // #region filter
+
+        $(document).on("click", ".trans-search-button", function (event) {
+            refreshTable();
+        });
+
+        $(document).on("click", ".trans-remove-filtr", function (event) {
+
+            $("#searchTransForm #TariffCategoryId").val('');
+            $("#searchTransForm #TransDate").val('');
+            $("#searchTransForm #PatientNationalCode").val('');
+            $("#searchTransForm #MainNationalCode").val('');
+            $("#searchTransForm #PatientName").val('');
+            $("#searchTransForm #MainName").val('');
+
+            refreshTable();
+        });
+
+        // #endregion
+
+        //#region Select All Checkbox
+        var selectAll = false;
+
+        $('#datatable thead th input[type=checkbox]').change(function () {
+            selectAll = $(this).is(":checked");
+            selectAllCheckBoxes('datatable');
+        });
+        //#endregion
+
+        //#region refreshTable()
+        function refreshTable() {
+            var table = $('#datatable').DataTable();
+            table.ajax.reload();
+        }
+        // #endregion
+
+        //#region Loading
+        function showLoading() {
+            $("#LoadingImage").show();
+            $("#BackPannel").show();
+        }
+
+        function hideLoading() {
+            $("#LoadingImage").hide();
+            $("#BackPannel").hide();
+        }
+        //#endregion
+
+        // #region lnkEdit
+        $("#datatable").on("click", ".lnkEdit", function (e) {
+            e.preventDefault();
+            url = $(this).attr('href');
+            showLoading();
+
+            $("#ModalDivEdit").load(url, function () {
+                hideLoading();
+
+                ShowModalEdit()
+            });
+        });
+        //#endregion
+
+        // #region ShowModalEdit
+        function ShowModalEdit() {
+            $('#TransModalEdit').modal('show');
+        }
+        // #endregion
+
+        // #region HideModalEdit
+        function HideModalEdit() {
+            $('#TransModalEdit').modal('hide');
+        }
+        // #endregion
+
+        // #region ShowModalEditDocument
+        function ShowModalEditDocument() {
+            $('#ModalEditDocument').modal('show');
+        }
+        // #endregion
+
+        // #region HidModalEditDocument
+        function HideModalEditDocument() {
+            $('#ModalEditDocument').modal('hide');
+        }
+        // #endregion
+
+        //#region closeDeleteTrans
+        function closeDeleteTrans() {
+            $('#delete-trans').modal('hide');
+        }
+        //#endregion
+
+        //#region keyup-numbers
+        //$(document).on("keyup", ".numbers", function (event) {
+        //    //$(this).keyup(function (event) {
+
+        //    // skip for arrow keys
+        //    if (event.which >= 37 && event.which <= 40) return;
+
+        //    // format number
+        //    $(this).val(function (index, value) {
+        //        return value
+        //        .replace(/\D/g, "")
+        //        .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+        //        ;
+        //    });
+        //});
+        // #endregion
+
+        //#region btnDelete
+        $('#btnDelete').click(function (e) {
+            e.preventDefault();
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action(MVC.Trans.ActionNames.Delete, MVC.Trans.Name)',
+                data: {
+                    transId: transId,
+                },
+                success: function (data) {
+                    //hideLoading();
+                    if (data.success) {
+                        closeDeleteTrans();
+                        refreshTable();
+                        swal({
+                            title: "اطلاعات شما با موفقیت حذف شد",
+                            type: "success",
+                            confirmButtonClass: 'btn-primary',
+                            confirmButtonText: "تایید"
+                        });
+                    }
+                    else {
+
+                        errorNotify('اشکال در حذف اطلاعات، لطفا مجددا تلاش نمایید')
+                    }
+                },
+                error: function (data) {
+                    errorNotify('اشکال در حذف اطلاعات، لطفا مجددا تلاش نمایید')
+                }
+            });
+        });
+        // #endregion
+
+        function closeConfirmModal() {
+            $('#confirm-send').modal('hide');
+        }
+
+        $('#sendBackTrans').click(function (e) {
+            if (selectAll == false) {
+                return onSelectableDataTableButton('datatable', 'هیچ هزینه ای جهت ارسال انتخاب نشده است');
+            }
+        });
+
+        $('#btnConfirmSend').click(function (e) {
+            var ids = new Array();
+
+            if (selectAll == false) {
+                ids = getSelectableRowIds('datatable');
+            }
+            e.preventDefault();
+            showLoading();
+
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action(MVC.Trans.ActionNames.SendTransToInsurance, MVC.Trans.Name)',
+                data: {
+                    TransIds: ids,
+                    IsSelectAll: selectAll,
+                    CompanyInsuranceId: $("#searchTransForm #CompanyInsuranceId").val(),
+                    PatientName: $("#searchTransForm #PatientName").val(),
+                    PatientNationalCode: $("#searchTransForm #PatientNationalCode").val(),
+                    MainName: $("#searchTransForm #MainName").val(),
+                    MainNationalCode: $("#searchTransForm #MainNationalCode").val(),
+                    TransDate: $("#searchTransForm #TransDate").val(),
+                    TariffCategoryId: $("#searchTransForm #TariffCategoryId").val()
+                },
+                success: function (data) {
+                    //hideLoading();
+                    if (data.success) {
+                        $('#datatable thead th input[type=checkbox]').prop("checked", false);
+                        closeConfirmModal();
+                        refreshTable();
+                        swal({
+                            title: "اطلاعات شما با موفقیت ارسال شد",
+                            type: "success",
+                            confirmButtonClass: 'btn-primary',
+                            confirmButtonText: "تایید"
+                        });
+                    }
+                    else {
+
+                        errorNotify('اشکال در ارسال اطلاعات، لطفا مجددا تلاش نمایید')
+                    }
+                    selectAll = false;
+                },
+                error: function (data) {
+                    //hideLoading();
+                    errorNotify('اشکال در ارسال اطلاعات، لطفا مجددا تلاش نمایید')
+                }
+            });
+        });
+        // #endregion
+
+        // #regionr submit_editTrans
+        $(document).on("submit", ".editTrans", function (e) {
+            e.preventDefault();
+            var $form = $(this);
+            var $target = $("#TransModalEdit");
+
+            $.ajax({
+                type: $form.attr('method'),
+                url: $form.attr('action'),
+                data: $form.serialize(),
+
+                success: function (data, status) {
+
+                    if (data.success == true) {
+                        HideModalEdit();
+                        successNotify('اطلاعات با موفقیت ویرایش شد')
+
+                        var CompanyInsuranceId = $("#searchTransForm #CompanyInsuranceId").val();
+
+                        if (CompanyInsuranceId == "") {
+                            //getHasTransCompanies();
+                            $("#searchTransForm #CompanyInsuranceId").val(@Model.CompanyInsuranceId);
+                        }
+                        refreshTable();
+                    }
+                    else if (data.error == true) {
+                        HideModalEdit();
+                        errorNotify('اشکال در ویرایش اطلاعات، لطفا مجددا تلاش نمایید')
+                        refreshTable();
+                    }
+                    //else {
+                    //    HideModal();
+                    //    $target.html(data);
+                    //    bootbox.dialog({
+                    //        message: $target.html(),
+                    //        title: "ایجاد هزینه",
+                    //        className: "modal-darkorange"
+                    //    });
+                    //    $.validator.unobtrusive.parse($form);
+                    //}
+                }
+            });
+        });
+        // #endregion
+
+        //#region change-CompanyInsuranceId
+        $("#searchTransForm #CompanyInsuranceId").change(function (e) {
+            var compInsue = $("#searchTransForm #CompanyInsuranceId").val();
+            getUserDate(compInsue);
+            getTariffCategoryData(compInsue);
+
+        });
+        //#endregion
+
+        //#region getTariffCategoryData
+        var getTariffCategoryData = function (companyInsuranceId) {
+            var procemessage = "<option value='0'> لطفا منتظر بمانید...</option>";
+            $("#searchTransForm #TariffCategoryId").html(procemessage).show();
+            var url = '@Url.Action(MVC.Trans.ActionNames.GetCompanyTariffCategoryList, MVC.Trans.Name)';
+            $.ajax({
+                url: url + "?companyInsuranceId=" + companyInsuranceId,
+                type: "GET",
+                dataType: "json",
+                async: false,
+                success: function (data) {
+                    var markup = "<option value='0'></option>";
+                    for (var x = 0; x < data.length; x++) {
+                        markup += "<option value=" + data[x].Id + ">" + data[x].Dess + "</option>";
+                    }
+                    $("#searchTransForm #TariffCategoryId").html(markup).show();
+                }
+            });
+        }
+        //#endregion
+         
+        //#region TransDocument
+        $("#datatable").on("click", ".lnkEditDocument", function (e) {
+            e.preventDefault();
+            url = $(this).attr('href');
+            showLoading();
+            $("#ModalDivEditDocument").load(url, function () {
+
+                hideLoading();
+
+                ShowModalEditDocument()
+
+
+                var $input = $(".document-file");
+
+                $input.fileinput({
+                    uploadUrl: "/FileUpload/Upload",
+                    language: "fa",
+                    uploadAsync: false,
+                    allowedFileTypes: ["pdf"],
+                    autoReplace: true,
+                    maxFileCount: 1,
+                    overwriteInitial: true,
+                    showUploadedThumbs: false,
+                    initialPreview: initPrev,
+
+                    //    [
+                    //    // PDF DATA
+                    //    //'http://kartik-v.github.io/bootstrap-fileinput-samples/samples/pdf-sample.pdf',
+                    //    //'/FileUpload/DownloadPDF?userInsuranceId=' + id,
+                    //    //''
+                    //],
+                    initialPreviewAsData: true, // identify if you are sending preview data only and not the raw markup
+                    initialPreviewFileType: 'pdf', // image is the default and can be overridden in config below
+                    initialPreviewConfig: initPrevConfig,
+                    //[
+                    //{ type: "pdf", caption: "document.pdf", size: "10000", url: "/FileUpload/DeleteDocument?userInsuranceId=" + id, key: id, showDelete: false },
+                    //],
+                    //initialPreviewShowDelete: false,
+                    showRemove: false,
+                    showClose: false,
+                    showUpload: false,
+                    layoutTemplates: { actionDelete: '' }, // disable thumbnail deletion
+
+                    dropZoneEnabled: false,
+                    deleteUrl: "/FileUpload/DeleteDocument?userInsuranceId=" + id,
+                    maxFileSize: 10000,
+
+
+                    browseClass: "btn btn-success",
+                    //browseIcon: "<i class=\"glyphicon glyphicon-picture\"></i> ",
+                    //removeClass: "btn btn-danger",
+                    //removeIcon: "<i class=\"glyphicon glyphicon-trash\"></i> ",
+                    //uploadClass: "btn btn-info",
+                    //uploadIcon: "<i class=\"glyphicon glyphicon-upload\"></i> "
+
+                    //layoutTemplates: {
+                    //    main1: "{preview}\n" +
+                    //    "<div class=\'input-group {class}\'>\n" +
+                    //    "   <div class=\'input-group-btn\'>\n" +
+                    //    "       {browse}\n" +
+                    //    "       {upload}\n" +
+                    //    "       {remove}\n" +
+                    //    "   </div>\n" +
+                    //    "   {caption}\n" +
+                    //    "</div>"
+                    //}
+                    //purifyHtml: true, // this by default purifies HTML data for preview
+                    //uploadExtraData: {
+                    //    img_key: "1000",
+                    //    img_keywords: "happy, places",
+                    //}
+                })
+                .on("filebatchselected", function (event, files) {
+                    // trigger upload method immediately after files are selected
+                    $input.fileinput("upload");
+                });
+
+                $("#kvFileinputModal").detach().appendTo('.bootbox .modal');
+
+                hideLoading();
+            });
+        });
+        //#endregion
+
+    </script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+}
+

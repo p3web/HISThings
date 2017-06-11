@@ -1,0 +1,277 @@
+﻿@using TSSN.FTE.Insurance.Web.Common.Extentions;
+@model TSSN.FTE.Insurance.DTO.SearchTransDto
+@{
+    ViewBag.Title = "گزارش هزینه های ارسالی";
+}
+
+@section contents {
+    @Styles.Render("~/Content/datatable")
+    <link href="~/Content/PersianDatePicker.min.css" rel="stylesheet" />
+    <style>
+        .hide_column {
+            display: none;
+        }
+    </style>
+
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="page-title-box" style="height:40px;padding-top:9px;">
+            <ol class="breadcrumb pull-left">
+                <li><a href="#">گزارشات</a></li>
+                <li class="active">گزارش هزینه های ارسالی</li>
+            </ol>
+            @*<h4 class="page-title">فرم ثبت هزینه</h4>*@
+        </div>
+    </div>
+</div>
+
+@Html.Partial(MVC.Shared.Views._ModalPartial)
+
+
+@Html.Partial(MVC.Shared.Views._DeleteConfirmModal)
+
+
+
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="filter-box">
+            <button aria-controls="show-search" aria-expanded="false" class="btn btn-search waves-effect waves-light btn-block" data-target="#show-search" data-toggle="collapse" type="button">
+                <i class="fa fa-search"></i>
+                جهت تنظیم گزینه های جستجو کلیک کنید
+            </button>
+        </div>
+        <div class="card-box table-responsive">
+            @Html.Partial("_SearchTransReport", Model)
+            <table id="datatable" class="table table-striped table-bordered table-hover">
+                <thead class="bordered-primary">
+                    <tr>
+                        <th style="display:none"></th>
+                        <th>
+                            کد ملی بیمار
+                        </th>
+                        <th>
+                            نام و نام خانوادگی بیمار
+                        </th>
+                        <th>
+                            کد ملی پرسنل
+                        </th>
+                        <th>
+                            نام و نام خانوادگی پرسنل
+                        </th>
+                        <th>
+                            نوع هزینه
+                        </th>
+                        <th>
+                            نسبت
+                        </th>
+                        <th>
+                            تاریخ هزینه
+                        </th>
+                        <th>
+                            مبلغ هزینه (ریال)
+                        </th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+
+    <script src="~/Scripts/PersianDatePicker.min.js"></script>
+    @Scripts.Render("~/bundles/datatable")
+    @Scripts.Render("~/bundle/core-app")
+    @Scripts.Render("~/bundles/autocomplete")
+
+    <script type="text/javascript">
+
+        $(document).on("click", "a[data-form-method='post']", function (event) {
+
+            event.preventDefault();
+            var element = $(this);
+            var action = element.attr("href");
+            element.closest("form").each(function () {
+                var form = $(this);
+                form.attr("action", action);
+                form.submit();
+            });
+        });
+
+        // #region Datatable
+
+        var oTable = $('#datatable').DataTable({
+            "bFilter": false,
+            "bLengthChange": false,
+            "bProcessing": true,
+            "bServerSide": true,
+            "sAjaxSource": '@Url.Action(MVC.Report.ActionNames.GetSentTransList, MVC.Report.Name)',
+            "sServerMethod": "GET",
+            "fnServerData": function (sSource, aoData, fnCallback, oSettings) {
+                oSettings.jqXHR = $.ajax({
+                    "dataType": 'json',
+                    "type": "POST",
+                    "url": sSource,
+                    "data": aoData,
+                    "success": function (data) {
+                        //hideLoading();
+                        if (data == false) {
+                            errorNotify('خطا در پردازش اطلاعات رخ داده است.')
+                        }
+                        else
+                            fnCallback(data);
+                    }
+                });
+            },
+            "fnServerParams": function (aoData) {
+                var CompanyInsuranceId = $("#searchTransForm #CompanyInsuranceId").val();
+                var tariffCategoryId = $("#searchTransForm #TariffCategoryId").val();
+                var patientNationalCode = $("#searchTransForm #PatientNationalCode").val();
+                var mainNationalCode = $("#searchTransForm #MainNationalCode").val();
+                var patientName = $("#searchTransForm #PatientName").val();
+                var mainName = $("#searchTransForm #MainName").val();
+                var transDate_To = $("#searchTransForm #TransDate_To").val();
+                var transDate_From = $("#searchTransForm #TransDate_From").val();
+                //var trackingNo = $("#searchTransForm #TrackingNo").val();
+
+                aoData.push({ name: "CompanyInsuranceId", value: CompanyInsuranceId });
+                aoData.push({ name: "TariffCategoryId", value: tariffCategoryId });
+                aoData.push({ name: "PatientNationalCode", value: patientNationalCode });
+                aoData.push({ name: "MainNationalCode", value: mainNationalCode });
+                aoData.push({ name: "PatientName", value: patientName });
+                aoData.push({ name: "MainName", value: mainName });
+                aoData.push({ name: "TransDate_To", value: transDate_To });
+                aoData.push({ name: "TransDate_From", value: transDate_From });
+                //aoData.push({ name: "TrackingNo", value: trackingNo });
+            },
+            //"iDisplayLength": 10,
+            "aaSorting": [[0, 'desc']],
+            "sDom": "Tflt<'row DTTTFooter'<'col-sm-6'i><'col-sm-6'p>>",
+            "language": {
+                "lengthMenu": "نمایش _MENU_ رکورد در صفحه",
+                "zeroRecords": "رکوردی یافت نشد",
+                "info": "نمایش _START_ تا _END_ از _TOTAL_ رکورد",
+                "infoEmpty": "",
+                "paginate": {
+                    "first": "اول",
+                    "last": "آخر",
+                    "next": "بعدی",
+                    "previous": "قبلی"
+                },
+            },
+
+            "aoColumns": [
+                    { className: "farsi-digit hide_column", "mDataProp": "TransId" },
+                    { className: "farsi-digit", "mDataProp": "PatientNationalCode" },
+                    { "mDataProp": "PatientName" },
+                    { className: "farsi-digit", "mDataProp": "MainNationalCode" },
+                    { "mDataProp": "MainName" },
+                    { "mDataProp": "TariffCategoryTitle" },
+                    { "mDataProp": "RelationTitle", "sWidth": "5%" },
+                    { className: "farsi-digit", "mDataProp": "TransDateFa" },
+                    { className: "farsi-digit", "mDataProp": "FormattedTransAmount" },
+                   
+            ]
+        });
+        //#endregion
+
+        // #region User Date
+
+        var userData = [];
+        function getUserDate(CompanyInsuranceId) {
+            $.ajax({
+                url: '@Url.Action(MVC.Trans.ActionNames.GetCompanyUsers, MVC.Trans.Name)' + '?companyInsuranceId=' + CompanyInsuranceId,
+                type: "GET",
+                dataType: "json",
+                async: false,
+                success: function (data) {
+                    userData = data;
+                }
+            });
+        }
+        getUserDate($("#searchTransForm #CompanyInsuranceId").val());
+
+        // #endregion
+
+        // #region refreshTable
+        function refreshTable() {
+            var table = $('#datatable').DataTable();
+            table.ajax.reload();
+        }
+        // #endregion
+
+        // #region Filter
+        $(document).on("click", ".trans-search-button", function (event) {
+            refreshTable();
+        });
+
+        $(document).on("click", ".trans-remove-filtr", function (event) {
+            $("#searchTransForm #TariffCategoryId").val('');
+            $("#searchTransForm #TransDate").val('');
+            $("#searchTransForm #PatientNationalCode").val('');
+            $("#searchTransForm #MainNationalCode").val('');
+            $("#searchTransForm #PatientName").val('');
+            $("#searchTransForm #MainName").val('');
+
+            refreshTable();
+        });
+        // #endregion
+
+        //#region change-CompanyInsuranceId
+        $("#searchTransForm #CompanyInsuranceId").change(function (e) {
+            var compInsue = $("#searchTransForm #CompanyInsuranceId").val();
+            getUserDate(compInsue);
+            getTariffCategoryData(compInsue);
+
+        });
+        //#endregion
+
+        //#region getTariffCategoryData
+        var getTariffCategoryData = function (companyInsuranceId) {
+            var procemessage = "<option value='0'> لطفا منتظر بمانید...</option>";
+            $("#searchTransForm #TariffCategoryId").html(procemessage).show();
+            var url = '@Url.Action(MVC.Trans.ActionNames.GetCompanyTariffCategoryList, MVC.Trans.Name)';
+            $.ajax({
+                url: url + "?companyInsuranceId=" + companyInsuranceId,
+                type: "GET",
+                dataType: "json",
+                async: false,
+                success: function (data) {
+                    var markup = "<option value='0'></option>";
+                    for (var x = 0; x < data.length; x++) {
+                        markup += "<option value=" + data[x].Id + ">" + data[x].Title + "</option>";
+                    }
+                    $("#searchTransForm #TariffCategoryId").html(markup).show();
+                }
+            });
+        }
+
+        $("#lnkPrint").on("click", function (e) {
+
+            //   var w = window.open();
+            //   //put what controller gave in the new tab or win 
+            //   //$(w.document.body).html(jqXHR.responseText);
+            //   w.location.href = "/Trans/PrintViewConfirmedTrans?DateSendToArman_From=" + $("#DateSendToArman_From").val() + "&DateSendToArman_To=" + $("#DateSendToArman_To").val() + "&TrackingNoForShow=" + $("#TrackingNoForShow").val();
+
+            var w = window.open();
+            w.location.href = "/Report/SendedTransReport?CompanyInsuranceId=" + $("#searchTransForm #CompanyInsuranceId").val()            
+                + "&TransDate_To=" + $("#searchTransForm #TransDate_To").val()
+                + "&TrackingNo=" + $("#searchTransForm #TrackingNo").val()
+                + "&TransDate_From=" + $("#searchTransForm #TransDate_From").val()
+                + "&TariffCategoryId=" + $("#searchTransForm #TariffCategoryId").val()
+                + "&PatientNationalCode=" + $("#searchTransForm #PatientNationalCode").val()
+                + "&MainNationalCode=" + $("#searchTransForm #MainNationalCode").val()
+                + "&PatientName=" + $("#searchTransForm #PatientName").val()
+                + "&MainName=" + $("#searchTransForm #MainName").val()
+                + "&CompanyInsuranceName=" + $("#searchTransForm #CompanyInsuranceId option:selected").text();
+
+        });
+       
+
+    </script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+}
+

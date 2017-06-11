@@ -1,0 +1,60 @@
+﻿@using TSSN.FTE.Insurance.Web.Common.Extentions;
+@model TSSN.FTE.Insurance.DTO.SearchTransDto
+@{
+    ViewBag.Title = "لیست هزینه ها";
+}
+
+@section contents {
+    @Styles.Render("~/Content/datatable")
+    <link href="~/Content/PersianDatePicker.min.css" rel="stylesheet" />
+    @Styles.Render("~/Content/fileinput")
+    <style>
+        .hide_column {
+            display: none;
+        }
+    </style>
+
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="page-title-box" style="height:40px;padding-top:9px;">
+            <ol class="breadcrumb pull-left">
+                <li><a href="#">هزینه ها</a></li>
+                <li class="active">ثبت هزینه</li>
+            </ol>
+            
+        </div>
+    </div>
+</div>
+
+@Html.Partial(MVC.Shared.Views._ModalPartial)
+
+@Html.Partial(MVC.Shared.Views._DeleteConfirmModal)
+
+<div class="row">
+    <div class="col-sm-12">   
+        <div id="PGrid" class="card-box table-responsive"></div>
+    </div>
+</div>
+
+@section scripts {
+
+    <script src="~/Scripts/PersianDatePicker.min.js"></script>
+    @Scripts.Render("~/bundles/datatable")
+    @Scripts.Render("~/bundle/core-app")
+    @Scripts.Render("~/bundles/autocomplete")
+    @Scripts.Render("~/bundles/bootstrap-fileinput")    
+    <script>
+        var company= {};
+        var  SelectedCompanyID= @Model.CompanyInsuranceId; //____ firstCompany
+        var i = 0;
+        @foreach (var item in Model.Companies) {
+            @:company[i]={name : "@item.CompanyName" , value:@item.CompanyInsuranceId};i++;
+            }
+        Trans.transEntry.setGrid();
+    </script>
+
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+}
+

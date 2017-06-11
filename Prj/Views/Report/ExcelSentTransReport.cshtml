@@ -1,0 +1,89 @@
+﻿@model IEnumerable<TSSN.FTE.Insurance.DTO.TransListDto>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>TransExcelReport</title>
+</head>
+<body>
+    <div>
+        <table>
+            <thead>
+                <tr role="row">
+                    <th>
+                        ردیف
+                    </th>
+                    <th>
+                        نام بیمه گزار  (نام شرکت)
+                    </th>
+                    @*<th>
+                        شماره بیمه نامه
+                    </th>*@
+                    <th>
+                        کد ملی بیمار
+                    </th>
+                    <th>
+                        نام و نام خانوادگی بیمار
+                    </th>
+                    <th>
+                        کد ملی بیمه شده اصلی
+                    </th>
+                    <th>
+                        نام و نام خانوادگی پرسنل
+                    </th>
+                    <th>
+                        کد هزینه
+                    </th>
+                    <th>
+                        تاریخ هزینه
+                    </th>
+                    <th>
+                        مبلغ هزینه (ریال)
+                    </th>
+                    <th>
+                        تعداد اوراق ضمیمه
+                    </th>
+                    @*<th>
+                        تاریخ اعلام خسارت
+                    </th>*@
+                    <th>
+                        تاریخ نامه بیمه گزار
+                    </th>
+                    <th>
+                        شماره نامه بیمه گزار
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.RowNumber</td>
+                        <td>@item.CompanyName</td>
+                        @*<td>@item.FullBNo</td>*@
+                        <td>@item.PatientNationalCode</td>
+                        <td>@item.PatientName</td>
+                        <td>@item.MainNationalCode</td>
+                        <td>@item.MainName</td>
+                        <td>@item.TariffCategoryId</td>
+                        <td>@item.TransDate</td>
+                        <td>@item.TransAmount</td>
+                        <td>@item.PageCount</td>
+                        @*<td>@item.DateTakmilFa</td>*@
+                        <td>@item.LetterDate</td>
+                        <td>@item.LetterNumber</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,148 @@
+﻿@model IEnumerable<TSSN.FTE.Insurance.DTO.TransListDto>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>هزینه های تایید شده</title>
+    @Styles.Render("~/Content/basicCss")
+
+    <!--Fonts-->
+    <style>
+        @@font-face {
+            font-family: 'NYekan';
+            src: url('../../fonts/BYekan.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @@font-face {
+            font-family: "WYekan";
+            src: url(../../fonts/Yekan.eot);
+            src: url(../../fonts/Yekan.eot?#iefix) format("embedded-opentype"), url(../../fonts/Yekan.woff) format("woff"), url(../../fonts/Yekan.ttf) format("truetype"), url(../../fonts/Yekan.svg#BYekan) format("svg");
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        body {
+            font-family: "WYekan" !important;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: "WYekan" !important;
+        }
+
+        .font-num {
+            font-family: 'NYekan' !important;
+            font-size: 14px !important;
+        }
+
+        .navbar .navbar-inner .navbar-header .navbar-account .account-area {
+            left: 0 !important;
+        }
+
+        table.table thead .sorting {
+            background: url('../../images/sort_both.png') no-repeat center left !important;
+        }
+
+        table.table thead .sorting_asc {
+            background: url('../../images/sort_asc.png') no-repeat center left !important;
+        }
+
+        table.table thead .sorting_desc {
+            background: url('../../images/sort_desc.png') no-repeat center left !important;
+        }
+
+        table.table thead .sorting_asc_disabled {
+            background: url('../../images/sort_asc_disabled.png') no-repeat center left !important;
+        }
+
+        table.table thead .sorting_desc_disabled {
+            background: url('../../images/sort_desc_disabled.png') no-repeat center left !important;
+        }
+    </style>
+    @*<link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300" rel="stylesheet" type="text/css">*@
+
+    <!--Beyond styles-->
+    @Styles.Render("~/Content/beyondCss")
+    @Styles.Render("~/Content/datatableCss")
+
+    @*@media print {
+    thead {display: table-header-group;}
+    }*@
+</head>
+<body>
+
+    <div> 
+        <table class="table table-striped table-hover table-bordered" id="editabledatatable">
+            <thead class="bordered-darkorange">
+                <tr role="row">
+                    <th>
+                        کد ملی بیمار
+                    </th>
+                    <th>
+                        نام و نام خانوادگی بیمار
+                    </th>
+                    <th>
+                        کد ملی بیمه شده اصلی
+                    </th>
+                    <th>
+                        نام و نام خانوادگی پرسنل
+                    </th>
+                    <th>
+                        نوع هزینه
+                    </th>
+                    <th>
+                        نسبت
+                    </th>
+                    <th>
+                        تاریخ هزینه
+                    </th>
+                    <th>
+                        مبلغ هزینه (ریال)
+                    </th>
+                    <th>
+                        شماره پیگیری
+                    </th>
+                    <th>
+                        شماره نامه
+                    </th>
+                    <th>
+                        تاریخ نامه
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="font-num">@item.PatientNationalCode</td>
+                        <td>@item.PatientName</td>
+                        <td class="font-num">@item.MainNationalCode</td>
+                        <td>@item.MainName</td>
+                        <td>@item.TariffCategoryTitle</td>
+                        <td>@item.RelationTitle</td>
+                        <td class="font-num">@item.TransDateFa</td>
+                        <td class="font-num">@item.TransAmount</td>
+                       @* <td class="font-num">@item.TrackingNoForShow</td>*@
+                        <td class="font-num">@item.LetterNumber</td>
+                        <td class="font-num">@item.LetterDate</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+
+    @section scripts{
+      
+    }
+
+</body>
+</html>

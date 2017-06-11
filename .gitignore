@@ -1,0 +1,12 @@
+
+Prj/Controllers/AccountController.cs
+Prj/Controllers/CompanyController.cs
+Prj/Controllers/HomeController.cs
+Prj/Controllers/ReportController.cs
+Prj/App_Start/FilterConfig.cs
+Prj/App_Start/RouteConfig.cs
+Prj/bin/ApplicationInsights.config
+Prj/Web.Debug.config
+Prj/Web.config
+Prj/Views/Web.config
+Prj/Web.Release.config

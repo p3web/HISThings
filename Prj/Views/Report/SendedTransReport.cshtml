@@ -1,0 +1,22 @@
+﻿@using Stimulsoft.Report.Mvc;
+@using System.Web.UI.WebControls;
+@{
+    ViewBag.Title = "گزارش هزینه های ارسال شده";
+    Layout = null;
+}
+
+
+@Html.Stimulsoft().RenderMvcViewerScripts()
+@Html.Stimulsoft().StiMvcViewer(new StiMvcViewerOptions()
+{
+    Theme = StiTheme.Office2010,
+    ActionGetReportSnapshot = "GetReportSnapshot",
+    ActionViewerEvent = "ViewerEvent",
+    ActionPrintReport = "PrintReport",
+    ActionExportReport = "ExportReport",
+    ActionInteraction = "Interaction"
+})
+
+
+
+

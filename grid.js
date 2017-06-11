@@ -183,7 +183,7 @@ function PSCO_grid(name) {
                     } else {
                         inputText = document.createElement('input');
                         inputText.setAttribute('type', 'text');
-                        inputText.setAttribute('onkeyup', 'check(this)');
+                        inputText.setAttribute('onchange', 'check(this)');
                         try{
                             if (this.cols[i].searchMode.toLowerCase() == 'datepicker' && this.DatePickerFunc != undefined) {
                                 inputText.setAttribute('onclick' , this.DatePickerFunc);

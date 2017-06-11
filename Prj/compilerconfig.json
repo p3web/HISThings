@@ -1,0 +1,22 @@
+﻿[
+  {
+    "outputFile": "Content/pages_green.css",
+    "inputFile": "Content/less/pages.less"
+  },
+  {
+    "outputFile": "Content/components_green.css",
+    "inputFile": "Content/less/components.less"
+  },
+  {
+    "outputFile": "Content/core_green.css",
+    "inputFile": "Content/less/core.less"
+  },
+  {
+    "outputFile": "Content/menu_green.css",
+    "inputFile": "Content/less/menu.less"
+  },
+  {
+    "outputFile": "Content/components_green.css",
+    "inputFile": "Content/less/components.less"
+  }
+]

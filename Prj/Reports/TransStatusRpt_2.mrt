@@ -1,0 +1,1022 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<StiSerializer version="1.02" type="Net" application="StiReport">
+  <Dictionary Ref="1" type="Dictionary" isKey="true">
+    <BusinessObjects isList="true" count="1">
+      <TransStatus Ref="2" type="Stimulsoft.Report.Dictionary.StiBusinessObject" isKey="true">
+        <Alias>TransStatus</Alias>
+        <BusinessObjects isList="true" count="0" />
+        <Category>TransStatus</Category>
+        <Columns isList="true" count="14">
+          <value>CodeMelli,System.String</value>
+          <value>NameBimar,System.String</value>
+          <value>NesbatText,System.String</value>
+          <value>DateHazineh,System.String</value>
+          <value>DessHazineh,System.String</value>
+          <value>MablHazineh,System.String</value>
+          <value>ParvandehNo,System.String</value>
+          <value>namehNo,System.String</value>
+          <value>DateNameh,System.String</value>
+          <value>MablPardakht,System.String</value>
+          <value>DatePardakhtMali,System.String</value>
+          <value>DessStateParvandeh,System.String</value>
+          <value>Dess,System.String</value>
+          <value>DateElam,System.String</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Guid>3bbf8cfee1894fa586d09006782a7b1e</Guid>
+        <Name>TransStatus</Name>
+      </TransStatus>
+    </BusinessObjects>
+    <Databases isList="true" count="0" />
+    <DataSources isList="true" count="0" />
+    <Relations isList="true" count="0" />
+    <Report isRef="0" />
+    <Variables isList="true" count="3">
+      <value>,FromDate,FromDate,System.String,,False,False</value>
+      <value>,ToDate,ToDate,System.String,,False,False</value>
+      <value>,CompanyName,CompanyName,System.String,,False,False</value>
+    </Variables>
+  </Dictionary>
+  <EngineVersion>EngineV2</EngineVersion>
+  <GlobalizationStrings isList="true" count="0" />
+  <MetaTags isList="true" count="0" />
+  <Pages isList="true" count="1">
+    <Page1 Ref="3" type="Page" isKey="true">
+      <Border>None;Black;2;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <Components isList="true" count="5">
+        <PageFooterBand1 Ref="4" type="PageFooterBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,7.42,10.22,0.3</ClientRectangle>
+          <Components isList="true" count="1">
+            <Text7 Ref="5" type="Text" isKey="true">
+              <Border>None;[143:102:102];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>4.5,-0.02,1.2,0.3</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Tahoma,10</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text7</Name>
+              <Page isRef="3" />
+              <Parent isRef="4" />
+              <Text>{PageNofM}</Text>
+              <TextBrush>[165:165:165]</TextBrush>
+              <VertAlignment>Center</VertAlignment>
+            </Text7>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Name>PageFooterBand1</Name>
+          <Page isRef="3" />
+          <Parent isRef="3" />
+        </PageFooterBand1>
+        <ReportTitle Ref="6" type="ReportTitleBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,0.2,10.22,0.7</ClientRectangle>
+          <Components isList="true" count="7">
+            <ReportTitleText Ref="7" type="Text" isKey="true">
+              <Border>None;[143:102:102];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,0,10.22,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Tahoma,16,Bold</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>ReportTitleText</Name>
+              <Page isRef="3" />
+              <Parent isRef="6" />
+              <Text>گزارش وضعیت هزینه ها</Text>
+              <TextBrush>[165:165:165]</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </ReportTitleText>
+            <Text2 Ref="8" type="Text" isKey="true">
+              <Border>None;[143:102:102];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>9.5,0.5,0.7,0.3</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Tahoma,12</Font>
+              <Guid>af7bcfc46ed74c928800dc4ad32cb100</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text2</Name>
+              <Page isRef="3" />
+              <Parent isRef="6" />
+              <Text>:از تاریخ </Text>
+              <TextBrush>[165:165:165]</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text2>
+            <Text3 Ref="9" type="Text" isKey="true">
+              <Border>None;[143:102:102];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>7.1,0.5,0.7,0.3</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Tahoma,12</Font>
+              <Guid>3b4cebde88b342098bb82b513b9f228f</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text3</Name>
+              <Page isRef="3" />
+              <Parent isRef="6" />
+              <Text>:تا تاریخ </Text>
+              <TextBrush>[165:165:165]</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text3>
+            <Text6 Ref="10" type="Text" isKey="true">
+              <Border>None;[143:102:102];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3.7,0.5,0.7,0.3</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Tahoma,12</Font>
+              <Guid>f258db83858f4e46bf283e75f004c6f1</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text6</Name>
+              <Page isRef="3" />
+              <Parent isRef="6" />
+              <Text>:شرکت</Text>
+              <TextBrush>[165:165:165]</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text6>
+            <Text1 Ref="11" type="Text" isKey="true">
+              <Border>None;[143:102:102];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>8.2,0.5,1.3,0.3</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Tahoma,12</Font>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text1</Name>
+              <Page isRef="3" />
+              <Parent isRef="6" />
+              <Text>{FromDate}</Text>
+              <TextBrush>[165:165:165]</TextBrush>
+              <VertAlignment>Center</VertAlignment>
+            </Text1>
+            <Text4 Ref="12" type="Text" isKey="true">
+              <Border>None;[143:102:102];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>5.8,0.5,1.3,0.3</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Tahoma,12</Font>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text4</Name>
+              <Page isRef="3" />
+              <Parent isRef="6" />
+              <Text>{ToDate}</Text>
+              <TextBrush>[165:165:165]</TextBrush>
+              <VertAlignment>Center</VertAlignment>
+            </Text4>
+            <Text5 Ref="13" type="Text" isKey="true">
+              <Border>None;[143:102:102];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.2,0.5,3.5,0.3</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Tahoma,12</Font>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text5</Name>
+              <Page isRef="3" />
+              <Parent isRef="6" />
+              <Text>{CompanyName}</Text>
+              <TextBrush>[165:165:165]</TextBrush>
+              <VertAlignment>Center</VertAlignment>
+            </Text5>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Name>ReportTitle</Name>
+          <Page isRef="3" />
+          <Parent isRef="3" />
+        </ReportTitle>
+        <Header Ref="14" type="HeaderBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,1.3,10.22,0.2</ClientRectangle>
+          <Components isList="true" count="14">
+            <HeaderText1 Ref="15" type="Text" isKey="true">
+              <Border>All;[143:102:102];1;Solid;False;4;Black;True</Border>
+              <Brush>[242:234:221]</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>0,0,0.7,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Tahoma,8,Bold</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>HeaderText1</Name>
+              <Page isRef="3" />
+              <Parent isRef="14" />
+              <Text>شرح</Text>
+              <TextBrush>[193:152:89]</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </HeaderText1>
+            <HeaderText2 Ref="16" type="Text" isKey="true">
+              <Border>All;[143:102:102];1;Solid;False;4;Black;True</Border>
+              <Brush>[242:234:221]</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>0.7,0,0.7,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Tahoma,8,Bold</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>HeaderText2</Name>
+              <Page isRef="3" />
+              <Parent isRef="14" />
+              <Text>وضعیت پرونده</Text>
+              <TextBrush>[193:152:89]</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </HeaderText2>
+            <HeaderText3 Ref="17" type="Text" isKey="true">
+              <Border>All;[143:102:102];1;Solid;False;4;Black;True</Border>
+              <Brush>[242:234:221]</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>1.4,0,0.7,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Tahoma,8,Bold</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>HeaderText3</Name>
+              <Page isRef="3" />
+              <Parent isRef="14" />
+              <Text>تاریخ پرداخت</Text>
+              <TextBrush>[193:152:89]</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </HeaderText3>
+            <HeaderText4 Ref="18" type="Text" isKey="true">
+              <Border>All;[143:102:102];1;Solid;False;4;Black;True</Border>
+              <Brush>[242:234:221]</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>2.1,0,0.7,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Tahoma,8,Bold</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>HeaderText4</Name>
+              <Page isRef="3" />
+              <Parent isRef="14" />
+              <Text>مبلغ پرداخت</Text>
+              <TextBrush>[193:152:89]</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </HeaderText4>
+            <HeaderText5 Ref="19" type="Text" isKey="true">
+              <Border>All;[143:102:102];1;Solid;False;4;Black;True</Border>
+              <Brush>[242:234:221]</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>2.8,0,0.7,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Tahoma,8,Bold</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>HeaderText5</Name>
+              <Page isRef="3" />
+              <Parent isRef="14" />
+              <Text>تاریخ نامه</Text>
+              <TextBrush>[193:152:89]</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </HeaderText5>
+            <HeaderText6 Ref="20" type="Text" isKey="true">
+              <Border>All;[143:102:102];1;Solid;False;4;Black;True</Border>
+              <Brush>[242:234:221]</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>3.5,0,0.7,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Tahoma,8,Bold</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>HeaderText6</Name>
+              <Page isRef="3" />
+              <Parent isRef="14" />
+              <Text>شماره نامه</Text>
+              <TextBrush>[193:152:89]</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </HeaderText6>
+            <HeaderText7 Ref="21" type="Text" isKey="true">
+              <Border>All;[143:102:102];1;Solid;False;4;Black;True</Border>
+              <Brush>[242:234:221]</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>4.8,0,0.7,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Tahoma,8,Bold</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>HeaderText7</Name>
+              <Page isRef="3" />
+              <Parent isRef="14" />
+              <Text>شماره پرونده</Text>
+              <TextBrush>[193:152:89]</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </HeaderText7>
+            <HeaderText8 Ref="22" type="Text" isKey="true">
+              <Border>All;[143:102:102];1;Solid;False;4;Black;True</Border>
+              <Brush>[242:234:221]</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>5.5,0,0.8,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Tahoma,8,Bold</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>HeaderText8</Name>
+              <Page isRef="3" />
+              <Parent isRef="14" />
+              <Text>مبلغ هزینه (ریال)</Text>
+              <TextBrush>[193:152:89]</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </HeaderText8>
+            <HeaderText9 Ref="23" type="Text" isKey="true">
+              <Border>All;[143:102:102];1;Solid;False;4;Black;True</Border>
+              <Brush>[242:234:221]</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>6.3,0,0.9,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Tahoma,8,Bold</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>HeaderText9</Name>
+              <Page isRef="3" />
+              <Parent isRef="14" />
+              <Text>نوع هزینه</Text>
+              <TextBrush>[193:152:89]</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </HeaderText9>
+            <HeaderText10 Ref="24" type="Text" isKey="true">
+              <Border>All;[143:102:102];1;Solid;False;4;Black;True</Border>
+              <Brush>[242:234:221]</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>7.2,0,0.7,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Tahoma,8,Bold</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>HeaderText10</Name>
+              <Page isRef="3" />
+              <Parent isRef="14" />
+              <Text>تاریخ هزینه</Text>
+              <TextBrush>[193:152:89]</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </HeaderText10>
+            <HeaderText11 Ref="25" type="Text" isKey="true">
+              <Border>All;[143:102:102];1;Solid;False;4;Black;True</Border>
+              <Brush>[242:234:221]</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>7.9,0,0.7,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Tahoma,8,Bold</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>HeaderText11</Name>
+              <Page isRef="3" />
+              <Parent isRef="14" />
+              <Text>نسبت</Text>
+              <TextBrush>[193:152:89]</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </HeaderText11>
+            <HeaderText12 Ref="26" type="Text" isKey="true">
+              <Border>All;[143:102:102];1;Solid;False;4;Black;True</Border>
+              <Brush>[242:234:221]</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>8.6,0,0.8,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Tahoma,8,Bold</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>HeaderText12</Name>
+              <Page isRef="3" />
+              <Parent isRef="14" />
+              <Text>نام و نام خانوادگی بیمار</Text>
+              <TextBrush>[193:152:89]</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </HeaderText12>
+            <HeaderText13 Ref="27" type="Text" isKey="true">
+              <Border>All;[143:102:102];1;Solid;False;4;Black;True</Border>
+              <Brush>[242:234:221]</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>9.4,0,0.8,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Tahoma,8,Bold</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>HeaderText13</Name>
+              <Page isRef="3" />
+              <Parent isRef="14" />
+              <Text>کد ملی بیمار</Text>
+              <TextBrush>[193:152:89]</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </HeaderText13>
+            <Text8 Ref="28" type="Text" isKey="true">
+              <Border>All;[143:102:102];1;Solid;False;4;Black;True</Border>
+              <Brush>[242:234:221]</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>4.2,0,0.6,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Tahoma,8,Bold</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <Guid>4f2dee579f1242598befc2d06eac3eeb</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text8</Name>
+              <Page isRef="3" />
+              <Parent isRef="14" />
+              <Text>تاریخ اعلام خسارت</Text>
+              <TextBrush>[193:152:89]</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text8>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Name>Header</Name>
+          <Page isRef="3" />
+          <Parent isRef="3" />
+        </Header>
+        <Data Ref="29" type="DataBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <BusinessObjectGuid>3bbf8cfee1894fa586d09006782a7b1e</BusinessObjectGuid>
+          <ClientRectangle>0,1.9,10.22,0.2</ClientRectangle>
+          <Components isList="true" count="14">
+            <DataText1 Ref="30" type="Text" isKey="true">
+              <Border>All;[143:102:102];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>0,0,0.7,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Tahoma,8</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>DataText1</Name>
+              <Page isRef="3" />
+              <Parent isRef="29" />
+              <Text>{TransStatus.Dess}</Text>
+              <TextBrush>[193:152:89]</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <VertAlignment>Center</VertAlignment>
+            </DataText1>
+            <DataText2 Ref="31" type="Text" isKey="true">
+              <Border>All;[143:102:102];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>0.7,0,0.7,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Tahoma,8</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>DataText2</Name>
+              <Page isRef="3" />
+              <Parent isRef="29" />
+              <Text>{TransStatus.DessStateParvandeh}</Text>
+              <TextBrush>[193:152:89]</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <VertAlignment>Center</VertAlignment>
+            </DataText2>
+            <DataText3 Ref="32" type="Text" isKey="true">
+              <Border>All;[143:102:102];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>1.4,0,0.7,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Tahoma,8</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>DataText3</Name>
+              <Page isRef="3" />
+              <Parent isRef="29" />
+              <Text>{TransStatus.DatePardakhtMali}</Text>
+              <TextBrush>[193:152:89]</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <VertAlignment>Center</VertAlignment>
+            </DataText3>
+            <DataText4 Ref="33" type="Text" isKey="true">
+              <Border>All;[143:102:102];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>2.1,0,0.7,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Tahoma,8</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>DataText4</Name>
+              <Page isRef="3" />
+              <Parent isRef="29" />
+              <Text>{TransStatus.MablPardakht}</Text>
+              <TextBrush>[193:152:89]</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <VertAlignment>Center</VertAlignment>
+            </DataText4>
+            <DataText5 Ref="34" type="Text" isKey="true">
+              <Border>All;[143:102:102];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>2.8,0,0.7,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Tahoma,8</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>DataText5</Name>
+              <Page isRef="3" />
+              <Parent isRef="29" />
+              <Text>{TransStatus.DateNameh}</Text>
+              <TextBrush>[193:152:89]</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <VertAlignment>Center</VertAlignment>
+            </DataText5>
+            <DataText6 Ref="35" type="Text" isKey="true">
+              <Border>All;[143:102:102];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>3.5,0,0.7,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Tahoma,8</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>DataText6</Name>
+              <Page isRef="3" />
+              <Parent isRef="29" />
+              <Text>{TransStatus.namehNo}</Text>
+              <TextBrush>[193:152:89]</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <VertAlignment>Center</VertAlignment>
+            </DataText6>
+            <DataText7 Ref="36" type="Text" isKey="true">
+              <Border>All;[143:102:102];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>4.8,0,0.7,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Tahoma,8</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>DataText7</Name>
+              <Page isRef="3" />
+              <Parent isRef="29" />
+              <Text>{TransStatus.ParvandehNo}</Text>
+              <TextBrush>[193:152:89]</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <VertAlignment>Center</VertAlignment>
+            </DataText7>
+            <DataText8 Ref="37" type="Text" isKey="true">
+              <Border>All;[143:102:102];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>5.5,0,0.8,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Tahoma,8</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>DataText8</Name>
+              <Page isRef="3" />
+              <Parent isRef="29" />
+              <Text>{TransStatus.MablHazineh}</Text>
+              <TextBrush>[193:152:89]</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <VertAlignment>Center</VertAlignment>
+            </DataText8>
+            <DataText9 Ref="38" type="Text" isKey="true">
+              <Border>All;[143:102:102];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>6.3,0,0.9,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Tahoma,8</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>DataText9</Name>
+              <Page isRef="3" />
+              <Parent isRef="29" />
+              <Text>{TransStatus.DessHazineh}</Text>
+              <TextBrush>[193:152:89]</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <VertAlignment>Center</VertAlignment>
+            </DataText9>
+            <DataText10 Ref="39" type="Text" isKey="true">
+              <Border>All;[143:102:102];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>7.2,0,0.7,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Tahoma,8</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>DataText10</Name>
+              <Page isRef="3" />
+              <Parent isRef="29" />
+              <Text>{TransStatus.DateHazineh}</Text>
+              <TextBrush>[193:152:89]</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <VertAlignment>Center</VertAlignment>
+            </DataText10>
+            <DataText11 Ref="40" type="Text" isKey="true">
+              <Border>All;[143:102:102];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>7.9,0,0.7,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Tahoma,8</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>DataText11</Name>
+              <Page isRef="3" />
+              <Parent isRef="29" />
+              <Text>{TransStatus.NesbatText}</Text>
+              <TextBrush>[193:152:89]</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <VertAlignment>Center</VertAlignment>
+            </DataText11>
+            <DataText12 Ref="41" type="Text" isKey="true">
+              <Border>All;[143:102:102];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>8.6,0,0.8,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Tahoma,8</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>DataText12</Name>
+              <Page isRef="3" />
+              <Parent isRef="29" />
+              <Text>{TransStatus.NameBimar}</Text>
+              <TextBrush>[193:152:89]</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <VertAlignment>Center</VertAlignment>
+            </DataText12>
+            <DataText13 Ref="42" type="Text" isKey="true">
+              <Border>All;[143:102:102];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>9.4,0,0.8,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Tahoma,8</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>DataText13</Name>
+              <Page isRef="3" />
+              <Parent isRef="29" />
+              <Text>{TransStatus.CodeMelli}</Text>
+              <TextBrush>[193:152:89]</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <VertAlignment>Center</VertAlignment>
+            </DataText13>
+            <Text9 Ref="43" type="Text" isKey="true">
+              <Border>All;[143:102:102];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>4.2,0,0.6,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Tahoma,8</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <Guid>ae58ed4b01824a84889e8ec818643d61</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text9</Name>
+              <Page isRef="3" />
+              <Parent isRef="29" />
+              <Text>{TransStatus.DateElam}</Text>
+              <TextBrush>[193:152:89]</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <Type>SystemVariables</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text9>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <EvenStyle>Flaxen_Data1_Even Style</EvenStyle>
+          <Filters isList="true" count="0" />
+          <Name>Data</Name>
+          <OddStyle>Flaxen_Data1_Odd Style</OddStyle>
+          <Page isRef="3" />
+          <Parent isRef="3" />
+          <Sort isList="true" count="0" />
+        </Data>
+        <Footer Ref="44" type="FooterBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,2.5,10.22,0.2</ClientRectangle>
+          <Components isList="true" count="0" />
+          <Conditions isList="true" count="0" />
+          <Name>Footer</Name>
+          <Page isRef="3" />
+          <Parent isRef="3" />
+        </Footer>
+      </Components>
+      <Conditions isList="true" count="0" />
+      <Guid>9e117edd4e2b45d480499fdd7727ec51</Guid>
+      <Margins>0.39,0.39,0.39,0.39</Margins>
+      <Name>Page1</Name>
+      <Orientation>Landscape</Orientation>
+      <PageHeight>8.5</PageHeight>
+      <PageWidth>11</PageWidth>
+      <PaperSize>Letter</PaperSize>
+      <Report isRef="0" />
+      <Watermark Ref="45" type="Stimulsoft.Report.Components.StiWatermark" isKey="true">
+        <Font>Arial,100</Font>
+        <TextBrush>[50:0:0:0]</TextBrush>
+      </Watermark>
+    </Page1>
+  </Pages>
+  <PrinterSettings Ref="46" type="Stimulsoft.Report.Print.StiPrinterSettings" isKey="true" />
+  <ReferencedAssemblies isList="true" count="8">
+    <value>System.Dll</value>
+    <value>System.Drawing.Dll</value>
+    <value>System.Windows.Forms.Dll</value>
+    <value>System.Data.Dll</value>
+    <value>System.Xml.Dll</value>
+    <value>Stimulsoft.Controls.Dll</value>
+    <value>Stimulsoft.Base.Dll</value>
+    <value>Stimulsoft.Report.Dll</value>
+  </ReferencedAssemblies>
+  <ReportAlias>Report</ReportAlias>
+  <ReportChanged>5/9/2016 12:24:53 AM</ReportChanged>
+  <ReportCreated>4/25/2016 5:32:16 AM</ReportCreated>
+  <ReportFile>G:\Source\Workspaces\Insurance\Insurance\Insurance.Web\Reports\TransStatusRpt_2.mrt</ReportFile>
+  <ReportGuid>b3f9e0ef4bfc41529ef3a82f7cd46bba</ReportGuid>
+  <ReportName>Report</ReportName>
+  <ReportUnit>Inches</ReportUnit>
+  <ReportVersion>2014.3.0</ReportVersion>
+  <Script>using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Data;
+using Stimulsoft.Controls;
+using Stimulsoft.Base.Drawing;
+using Stimulsoft.Report;
+using Stimulsoft.Report.Dialogs;
+using Stimulsoft.Report.Components;
+
+namespace Reports
+{
+    public class Report : Stimulsoft.Report.StiReport
+    {
+        public Report()        {
+            this.InitializeComponent();
+        }
+
+        #region StiReport Designer generated code - do not modify
+		#endregion StiReport Designer generated code - do not modify
+    }
+}
+</Script>
+  <ScriptLanguage>CSharp</ScriptLanguage>
+  <Styles isList="true" count="12">
+    <Flaxen_Report_Title1 Ref="47" type="Stimulsoft.Report.StiStyle" isKey="true">
+      <Border>None;[143:102:102];1;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <CollectionName>Flaxen</CollectionName>
+      <Conditions isList="true" count="1">
+        <Item45 Ref="48" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+          <ComponentType>Text, Primitive, Image</ComponentType>
+          <Placement>ReportTitle</Placement>
+          <Type>ComponentType, Placement, PlacementNestedLevel</Type>
+        </Item45>
+      </Conditions>
+      <Description />
+      <Font>Arial,14,Bold</Font>
+      <Name>Flaxen_Report_Title1</Name>
+      <TextBrush>[193:152:89]</TextBrush>
+    </Flaxen_Report_Title1>
+    <Flaxen_Report_Title2 Ref="49" type="Stimulsoft.Report.StiStyle" isKey="true">
+      <Border>None;[143:102:102];1;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <CollectionName>Flaxen</CollectionName>
+      <Conditions isList="true" count="1">
+        <Item47 Ref="50" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+          <ComponentType>Text, Primitive, Image</ComponentType>
+          <OperationPlacementNestedLevel>GreaterThanOrEqualTo</OperationPlacementNestedLevel>
+          <Placement>ReportTitle</Placement>
+          <PlacementNestedLevel>2</PlacementNestedLevel>
+          <Type>ComponentType, Placement, PlacementNestedLevel</Type>
+        </Item47>
+      </Conditions>
+      <Description />
+      <Font>Arial,10,Bold</Font>
+      <Name>Flaxen_Report_Title2</Name>
+      <TextBrush>[193:152:89]</TextBrush>
+    </Flaxen_Report_Title2>
+    <Flaxen_Report_Summary Ref="51" type="Stimulsoft.Report.StiStyle" isKey="true">
+      <Border>None;[143:102:102];1;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <CollectionName>Flaxen</CollectionName>
+      <Conditions isList="true" count="1">
+        <Item49 Ref="52" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+          <ComponentType>Text, Primitive, Image</ComponentType>
+          <Placement>ReportSummary</Placement>
+          <Type>ComponentType, Placement</Type>
+        </Item49>
+      </Conditions>
+      <Description />
+      <Font>Arial,10,Bold</Font>
+      <Name>Flaxen_Report_Summary</Name>
+      <TextBrush>[193:152:89]</TextBrush>
+    </Flaxen_Report_Summary>
+    <Flaxen_Page_Header Ref="53" type="Stimulsoft.Report.StiStyle" isKey="true">
+      <Border>None;[143:102:102];1;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <CollectionName>Flaxen</CollectionName>
+      <Conditions isList="true" count="1">
+        <Item51 Ref="54" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+          <ComponentType>Text, Primitive, Image</ComponentType>
+          <Placement>PageHeader</Placement>
+          <Type>ComponentType, Placement</Type>
+        </Item51>
+      </Conditions>
+      <Description />
+      <Font>Arial,10</Font>
+      <Name>Flaxen_Page_Header</Name>
+      <TextBrush>[193:152:89]</TextBrush>
+    </Flaxen_Page_Header>
+    <Flaxen_Page_Footer Ref="55" type="Stimulsoft.Report.StiStyle" isKey="true">
+      <Border>None;[143:102:102];1;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <CollectionName>Flaxen</CollectionName>
+      <Conditions isList="true" count="1">
+        <Item53 Ref="56" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+          <ComponentType>Text, Primitive, Image</ComponentType>
+          <Placement>PageFooter</Placement>
+          <Type>ComponentType, Placement</Type>
+        </Item53>
+      </Conditions>
+      <Description />
+      <Font>Arial,10</Font>
+      <Name>Flaxen_Page_Footer</Name>
+      <TextBrush>[193:152:89]</TextBrush>
+    </Flaxen_Page_Footer>
+    <Flaxen_Group_Header1 Ref="57" type="Stimulsoft.Report.StiStyle" isKey="true">
+      <Border>None;[143:102:102];1;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <CollectionName>Flaxen</CollectionName>
+      <Conditions isList="true" count="1">
+        <Item55 Ref="58" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+          <ComponentType>Text, Primitive, Image</ComponentType>
+          <OperationPlacementNestedLevel>GreaterThanOrEqualTo</OperationPlacementNestedLevel>
+          <Placement>GroupHeader</Placement>
+          <Type>ComponentType, Placement, PlacementNestedLevel</Type>
+        </Item55>
+      </Conditions>
+      <Description />
+      <Font>Arial,13,Bold</Font>
+      <Name>Flaxen_Group_Header1</Name>
+      <TextBrush>[193:152:89]</TextBrush>
+    </Flaxen_Group_Header1>
+    <Flaxen_Group_Footer1 Ref="59" type="Stimulsoft.Report.StiStyle" isKey="true">
+      <Border>None;[143:102:102];1;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <CollectionName>Flaxen</CollectionName>
+      <Conditions isList="true" count="1">
+        <Item57 Ref="60" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+          <ComponentType>Text, Primitive, Image</ComponentType>
+          <Placement>GroupFooter</Placement>
+          <Type>ComponentType, Placement, PlacementNestedLevel</Type>
+        </Item57>
+      </Conditions>
+      <Description />
+      <Font>Arial,13,Bold</Font>
+      <Name>Flaxen_Group_Footer1</Name>
+      <TextBrush>[193:152:89]</TextBrush>
+    </Flaxen_Group_Footer1>
+    <Flaxen_Header1 Ref="61" type="Stimulsoft.Report.StiStyle" isKey="true">
+      <Border>All;[143:102:102];1;Solid;False;4;Black;True</Border>
+      <Brush>[242:234:221]</Brush>
+      <CollectionName>Flaxen</CollectionName>
+      <Conditions isList="true" count="1">
+        <Item59 Ref="62" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+          <ComponentType>Text, Primitive, Image</ComponentType>
+          <OperationPlacementNestedLevel>GreaterThanOrEqualTo</OperationPlacementNestedLevel>
+          <Placement>Header</Placement>
+          <Type>ComponentType, Placement, PlacementNestedLevel</Type>
+        </Item59>
+      </Conditions>
+      <Description />
+      <Font>Arial,8,Bold</Font>
+      <Name>Flaxen_Header1</Name>
+      <TextBrush>[193:152:89]</TextBrush>
+    </Flaxen_Header1>
+    <Flaxen_Data1 Ref="63" type="Stimulsoft.Report.StiStyle" isKey="true">
+      <Border>All;[143:102:102];1;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <CollectionName>Flaxen</CollectionName>
+      <Conditions isList="true" count="1">
+        <Item61 Ref="64" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+          <ComponentType>Text, Primitive, Image, CheckBox</ComponentType>
+          <OperationPlacementNestedLevel>GreaterThanOrEqualTo</OperationPlacementNestedLevel>
+          <Placement>Data</Placement>
+          <Type>ComponentType, Placement, PlacementNestedLevel</Type>
+        </Item61>
+      </Conditions>
+      <Description />
+      <Font>Arial,8</Font>
+      <Name>Flaxen_Data1</Name>
+      <TextBrush>[193:152:89]</TextBrush>
+    </Flaxen_Data1>
+    <Flaxen_Data1_Odd_x0020_Style Ref="65" type="Stimulsoft.Report.StiStyle" isKey="true">
+      <Border>None;[143:102:102];1;Solid;False;4;Black</Border>
+      <Brush>White</Brush>
+      <CollectionName>Flaxen</CollectionName>
+      <Conditions isList="true" count="1">
+        <Item63 Ref="66" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+          <OperationPlacementNestedLevel>GreaterThanOrEqualTo</OperationPlacementNestedLevel>
+          <Placement>DataOddStyle</Placement>
+          <Type>Placement, PlacementNestedLevel</Type>
+        </Item63>
+      </Conditions>
+      <Description />
+      <Font>Arial,8</Font>
+      <Name>Flaxen_Data1_Odd Style</Name>
+      <TextBrush>[193:152:89]</TextBrush>
+    </Flaxen_Data1_Odd_x0020_Style>
+    <Flaxen_Data1_Even_x0020_Style Ref="67" type="Stimulsoft.Report.StiStyle" isKey="true">
+      <Border>None;[143:102:102];1;Solid;False;4;Black</Border>
+      <Brush>[240:237:232]</Brush>
+      <CollectionName>Flaxen</CollectionName>
+      <Conditions isList="true" count="1">
+        <Item65 Ref="68" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+          <OperationPlacementNestedLevel>GreaterThanOrEqualTo</OperationPlacementNestedLevel>
+          <Placement>DataEvenStyle</Placement>
+          <Type>Placement, PlacementNestedLevel</Type>
+        </Item65>
+      </Conditions>
+      <Description />
+      <Font>Arial,8</Font>
+      <Name>Flaxen_Data1_Even Style</Name>
+      <TextBrush>[193:152:89]</TextBrush>
+    </Flaxen_Data1_Even_x0020_Style>
+    <Flaxen_Footer1 Ref="69" type="Stimulsoft.Report.StiStyle" isKey="true">
+      <Border>All;[143:102:102];1;Solid;False;4;Black</Border>
+      <Brush>[242:234:221]</Brush>
+      <CollectionName>Flaxen</CollectionName>
+      <Conditions isList="true" count="1">
+        <Item67 Ref="70" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+          <ComponentType>Text, Primitive, Image</ComponentType>
+          <Placement>Footer</Placement>
+          <Type>ComponentType, Placement, PlacementNestedLevel</Type>
+        </Item67>
+      </Conditions>
+      <Description />
+      <Font>Arial,8</Font>
+      <Name>Flaxen_Footer1</Name>
+      <TextBrush>[193:152:89]</TextBrush>
+    </Flaxen_Footer1>
+  </Styles>
+</StiSerializer>

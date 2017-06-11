@@ -1,4 +1,15 @@
 //------ Global
+function CurrentTimeJalali() {
+    var CurrentTime = new Date();
+    CurrentTime = gregorian_to_jalali(CurrentTime.getFullYear(), (CurrentTime.getMonth() + 1), CurrentTime.getDate());
+    if (CurrentTime[1].length != 2) {
+        CurrentTime[1] = '0' + CurrentTime[1];
+    }
+    if (CurrentTime[2].length != 2) {
+        CurrentTime[2] = '0' + CurrentTime[2];
+    }
+    return CurrentTime[0] + "/" + CurrentTime[1] + "/" + CurrentTime[2];
+}
 function fillSelect(SelectTagID, data, selectedID) {
     var DataKeys = Object.keys(data);
     var option = '';
@@ -84,10 +95,11 @@ Trans.transEntry.setGrid = function () {
         { name: 'TariffCategoryTitle', thname: '????', hidden: false, type: 'text' },
         { name: 'TransAmount', thname: 'مبلغ', hidden: false, type: 'text' },
         { name: 'TransDate', hidden: true },
-        { name: 'TransDateFa', thname: 'تاریخ', hidden: false, type: '' },
+        { name: 'TransDateFa', thname: 'تاریخ', hidden: false, searchMode: 'datepicker' },
         { name: 'TransId', hidden: true }
     ];
-    Trans.transEntry.grid.DatePickerFunc = "PersianDatePicker.Show(this, '"++"')"
+
+    Trans.transEntry.grid.DatePickerFunc = "PersianDatePicker.Show(this, '" + CurrentTimeJalali() + "')";
     Trans.transEntry.grid.serverSorted = 'sorteBy';
     Trans.transEntry.grid.serverSerch = 'searchOnserver';
     Trans.transEntry.grid.button = [

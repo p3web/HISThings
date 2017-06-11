@@ -1,0 +1,161 @@
+﻿@model  TSSN.FTE.Insurance.DTO.SearchTransDto
+@using TSSN.FTE.Insurance.Web.Infrastructure.Extensions
+
+<form id="searchTransForm">
+    <div class="row collapse" id="show-search">
+        <div class="col-md-12">
+            <div class="well">
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="BirthCertificateNumber">
+                                نام شرکت
+                            </label>
+                            @if (User.IsBroker() || User.IsAdmin() || User.IsEvaluatorExpert())
+                            {
+                                @Html.DropDownListFor(m => m.CompanyInsuranceId, new SelectList(Model.Companies, "CompanyInsuranceId", "CompanyName"), "", new { @class = "form-control company-list"})
+                            }
+                            else if (User.IsUser() || User.IsCompany())
+                            {
+                                @Html.DropDownListFor(m => m.CompanyInsuranceId, new SelectList(Model.Companies, "CompanyInsuranceId", "CompanyName"), "", new { @class = "form-control company-list", @disabled = "disabled" })
+                            }
+                        </div>
+                    </div>
+                    <div class="col-md-3" style="padding-right:0">
+                        <div class="form-group">
+                            <label for="PatientName">
+                                نام بیمار
+                            </label>
+                            @Html.TextBoxFor(m => m.PatientName, new { @class = " form-control", maxlength = "50" })
+                            @Html.ValidationMessageFor(m => m.PatientName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-3" style="padding-right:0">
+                        <div class="form-group">
+                            <label for="MainName">
+                                نام بیمه شده ی اصلی
+                            </label>
+                            @Html.TextBoxFor(m => m.MainName, new { @class = " form-control", maxlength = "50" })
+                            @Html.ValidationMessageFor(m => m.MainName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="PatientNationalCode">
+                                کد ملی بیمار
+                            </label>
+                            @Html.TextBoxFor(m => m.PatientNationalCode, new { @class = "font-num form-control PatientNationalCode" })
+                            @Html.ValidationMessageFor(m => m.PatientNationalCode, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-2" style="padding-right:0">
+                        <div class="form-group">
+                            <label for="MainNationalCode">
+                                کد ملی بیمه شده ی اصلی
+                            </label>
+                            @Html.TextBoxFor(m => m.MainNationalCode, new { @class = "font-num form-control MainNationalCode" })
+                            @Html.ValidationMessageFor(m => m.MainNationalCode, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-3" style="padding-right:0">
+                        <div class="form-group">
+                            <label for="TariffCategoryId">
+                                نوع هزینه
+                            </label>
+                            @Html.DropDownListFor(m => m.TariffCategoryId, new SelectList(Model.TariffCategories, "Id", "Title"), "---انتخاب کنید---", new { @class = "form-control", @style = "padding-top:0" })
+                            @Html.ValidationMessageFor(m => m.TariffCategoryId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-3" style="padding-right:0">
+                        <div class="form-group">
+                            <label for="DateHazineh">
+                                تاریخ هزینه
+                            </label>
+                            @Html.EditorFor(model => model.TransDate)
+                            @Html.ValidationMessageFor(model => model.TransDate, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="pull-left">
+                            <button type="button" class="btn btn-sm btn-filter trans-search-button"
+                                    id="transSearchButton" autocomplete="off" data-loading-text="منتظر بمانید...">
+                                <i class="fa fa-filter"></i>
+                                اعمال فیلتر
+                            </button>
+                            <button aria-controls="show-search" aria-expanded="false" id="removeFilter"
+                                    class="btn btn-remove-filter trans-remove-filtr btn-sm" type="button">
+                                <i class="fa fa-times"></i>
+                                لغو فیلتر
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+</form>
+
+
+
+@this.ScriptBlock(
+    @<script type="text/javascript">
+        $(document).ready(function () {
+            var select2Instance = $(".company-list").select2({
+                placeholder: "یک شرکت را انتخاب نمایید ...",
+                //allowClear: true,
+                dir: "rtl",
+                dropdownParent: $('div.well'),
+            });
+
+            //select2Instance.on('select2:open', function (params) {
+
+            //    //var $offsetParent = this.$dropdownParent.offsetParent();
+            //    //var parentOffset = $offsetParent.offset();
+            //    //alert(parentOffset.right);
+            //    var container = $('.select2-container').last();
+            //    container.css("right", "15px");
+
+            //});
+        });
+    </script>
+)
+
+
+@*@this.ScriptBlock(
+    @<script type="text/javascript">
+        $(document).ready(function () {
+            var select2Instance = $(".company-list").select2({
+                placeholder: "یک شرکت را انتخاب نمایید ...",
+                //allowClear: true,
+                dir: "rtl",
+                dropdownParent: $('div.well'),
+            });
+
+            select2Instance.on('select2:open', function (params) {
+
+                //var $offsetParent = this.$dropdownParent.offsetParent();
+                //var parentOffset = $offsetParent.offset();
+                //alert(parentOffset.right);
+                var container = $('.select2-container').last();
+                container.css("right", "15px");
+
+            });
+        });
+
+
+
+    </script>
+    )*@
+
+

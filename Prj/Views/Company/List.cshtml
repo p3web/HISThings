@@ -1,0 +1,159 @@
+﻿m@odel TSSN.FTE.Insurance.DTO.SearchTransDto
+@{
+    ViewBag.Title = "List";
+}
+
+@section contents {
+    @Styles.Render("~/Content/datatable")
+    <link href="~/Content/PersianDatePicker.min.css" rel="stylesheet" />
+    @Styles.Render("~/Content/fileinput")
+    <style>
+        .hide_column {
+            display: none;
+        }
+    </style>
+
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="page-title-box" style="height:40px;padding-top:9px;">
+            <ol class="breadcrumb pull-left">
+                <li><a href="#">هزینه ها</a></li>
+                <li class="active">ثبت هزینه</li>
+            </ol>
+            @*<h4 class="page-title">فرم ثبت هزینه</h4>*@
+        </div>
+    </div>
+</div>
+
+@Html.Partial(MVC.Shared.Views._ModalPartial)
+
+@Html.Partial(MVC.Shared.Views._DeleteConfirmModal)
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="filter-box">
+            <button aria-controls="show-search" aria-expanded="false" class="btn btn-search waves-effect waves-light btn-block" data-target="#show-search" data-toggle="collapse" type="button">
+                <i class="fa fa-search"></i>
+                جهت تنظیم گزینه های جستجو کلیک کنید
+            </button>
+        </div>
+        <div class="card-box table-responsive">
+            @Html.Partial(MVC.Trans.Views._SearchTrans, Model)
+            <a href="#" data-loading-text="Loading..." class="lnkCreate btn btn-primary w-lg waves-effect waves-light m-b-5 create" style="margin-bottom:20px;"><i class="fa  fa-plus btn-icon"></i> ثبت هزینه جدید</a>
+            <table id="datatable" class="table table-striped table-bordered table-hover">
+                <thead class="bordered-primary">
+                    <tr>
+                        <th style="display:none"></th>
+                        <th>
+                            شناسه شرکت
+                        </th>
+                        <th>
+                            نام شرکت
+                        </th>
+                        <th>
+
+                        </th>
+                    </tr>
+                </thead>
+            </table>
+
+
+
+        </div>
+    </div>
+</div>
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/datatable")
+    @Scripts.Render("~/bundle/core-app")
+
+
+    <script type="text/javascript">
+
+        // #region Datatable
+
+        var oTable = $('#datatable').DataTable({
+            "bFilter": false,
+            "bLengthChange": false,
+            "bProcessing": true,
+            "bServerSide": true,
+            "sAjaxSource": '@Url.Action(MVC.Company.ActionNames.List, MVC.Company.Name)',
+            "sServerMethod": "GET",
+            "fnServerData": function (sSource, aoData, fnCallback, oSettings) {
+                oSettings.jqXHR = $.ajax({
+                    "dataType": 'json',
+                    "type": "POST",
+                    "url": sSource,
+                    "data": aoData,
+                    "success": function (data) {
+                        //hideLoading();
+                        if (data == false) {
+                            errorNotify('خطا در پردازش اطلاعات رخ داده است.')
+                        }
+                        else
+                            fnCallback(data);
+                    }
+                });
+            },
+            "fnServerParams": function (aoData) {
+                var CompanyInsuranceId = $("#searchTransForm #CompanyInsuranceId").val();
+                var CompanyName = $("#searchTransForm #CompanyName").val();
+
+
+                aoData.push({ name: "CompanyInsuranceId", value: CompanyInsuranceId });
+                aoData.push({ name: "CompanyName", value: CompanyName });
+                /*  aoData.push({ name: "TransDate", value: transDate });
+                  aoData.push({ name: "PatientNationalCode", value: patientNationalCode });
+                  aoData.push({ name: "MainNationalCode", value: mainNationalCode });
+                  aoData.push({ name: "PatientName", value: patientName });
+                  aoData.push({ name: "MainName", value: mainName });*/
+            },
+            //"iDisplayLength": 10,
+            "aaSorting": [[0, 'desc']],
+            "sDom": "Tflt<'row DTTTFooter'<'col-sm-6'i><'col-sm-6'p>>",
+            "language": {
+                "lengthMenu": "نمایش _MENU_ رکورد در صفحه",
+                "zeroRecords": "رکوردی یافت نشد",
+                "info": "نمایش _START_ تا _END_ از _TOTAL_ رکورد",
+                "infoEmpty": "",
+                "paginate": {
+                    "first": "اول",
+                    "last": "آخر",
+                    "next": "بعدی",
+                    "previous": "قبلی"
+                },
+            },
+
+            "aoColumns": [
+                    { className: "farsi-digit hide_column", "mDataProp": "TransId" },
+                    { className: "farsi-digit", "mDataProp": "PatientNationalCode" },
+                    { "mDataProp": "PatientName" },
+                    { className: "farsi-digit", "mDataProp": "MainNationalCode" },
+                    { "mDataProp": "MainName" },
+                    { "mDataProp": "TariffCategoryTitle" },
+                    { "mDataProp": "RelationTitle", "sWidth": "5%" },
+                    { className: "farsi-digit", "mDataProp": "TransDateFa" },
+                    { className: "farsi-digit", "mDataProp": "FormattedTransAmount" },
+                    {
+                        "sWidth": "10%",
+                        "mData": null,
+                        "bSortable": false,
+                        "mRender": function (data, type, full) {
+                            var CompanyInsuranceId = 6;
+                            //$("#searchTransForm #CompanyInsuranceId").val();
+                            var itemID = data.Id;
+                            var transId = full.TransId;
+                            return '<a href="' + '@Url.Action(MVC.Trans.ActionNames._Edit, MVC.Trans.Name)' + '?companyInsuranceId=' + CompanyInsuranceId + '&transId=' + full.TransId + '" data-loading-text="Loading..." class="lnkEdit edit"><i class="fa fa-edit edit-row"></i> </a>' +
+                                   '<a href="#" class="lnkDelete delete"><i class="fa fa-trash-o remove-row" data-toggle="modal" data-target="#delete-confirm"></i> </a>' +
+                                   '<a href="' + '@Url.Action(MVC.Trans.ActionNames._EditTransDocument, MVC.Trans.Name)' + '?transId=' + full.TransId + '" data-trans-id="' + full.TransId + '" data-loading-text="Loading..." class="lnkEditDocument edit"><i class="fa fa-upload upload-row"></i> </a>'
+
+
+                        }
+                    }
+            ]
+        });
+    </script>
+}

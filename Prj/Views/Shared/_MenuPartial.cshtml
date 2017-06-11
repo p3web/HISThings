@@ -1,0 +1,112 @@
+﻿@using TSSN.FTE.Insurance.Web.Infrastructure.Extensions
+
+<div class="sidebar-inner slimscrollleft">
+    <div id="sidebar-menu">
+        <ul>
+            <li>
+                <a href="@Url.Action(MVC.Home.ActionNames.Dashboard, MVC.Home.Name)" class="waves-effect waves-primary">
+                    <i class="menu-icon md md-dashboard"></i><span> داشبورد </span>
+                </a>
+            </li>
+
+            <li>
+                <a href="@Url.Action(MVC.UserInsurance.ActionNames.List, MVC.UserInsurance.Name)" class="waves-effect waves-primary">
+                    <i class="menu-icon glyphicon glyphicon-user"></i><span> اطلاعات بیمه شدگان </span>
+                </a>
+            </li>
+
+
+            <li class="has_sub">
+                <a href="javascript:void(0);" class="waves-effect waves-primary">
+                    <i class="menu-icon glyphicon glyphicon-list-alt"></i> <span> هزینه ها </span><span class="menu-arrow"></span>
+                </a>
+                <ul class="list-unstyled">
+                    <li><a href="@Url.Action(MVC.Trans.ActionNames.List, MVC.Trans.Name)">ثبت هزینه</a></li>
+                    <li><a href="@Url.Action(MVC.Trans.ActionNames.SendTrans, MVC.Trans.Name)">ارسال هزینه ها</a></li>
+                    <li><a href="@Url.Action(MVC.Trans.ActionNames.BackedTrans, MVC.Trans.Name)">کسری مدارک</a></li>
+                    @if (User.IsAdmin() || User.IsBroker())
+                    {
+                        <li><a href="@Url.Action(MVC.Trans.ActionNames.GetTrans, MVC.Trans.Name)">دریافت هزینه</a></li>
+                        <li><a href="@Url.Action(MVC.Trans.ActionNames.TransBrokerEvaluation, MVC.Trans.Name)">ارزیابی خسارت (نماینده بیمه)</a></li>
+                    }
+                    else if (User.IsAdmin() || User.IsEvaluatorExpert())
+                    {
+                        <li><a href="@Url.Action(MVC.Trans.ActionNames.TransBrokerEvaluation, MVC.Trans.Name)">ارزیابی خسارت (کارشناس ارزیاب())</a></li>
+                    }
+                </ul>
+            </li>
+
+
+            <li class="has_sub">
+                <a href="javascript:void(0);" class="waves-effect waves-primary">
+                    <i class="menu-icon fa fa-bar-chart"></i> <span> گزارشات </span><span class="menu-arrow"></span>
+                </a>
+                <ul class="list-unstyled">
+                    <li><a href="@Url.Action(MVC.Report.ActionNames.SentTransReport, MVC.Report.Name)">هزینه های ارسال شده</a></li>
+                    <li><a href="javascript:void(0);">گزارش وضعیت هزینه ها</a></li>
+                </ul>
+            </li>
+
+
+            @*<li class="has_sub">
+                    <a href="@Url.Action(MVC.Trans.ActionNames.List, MVC.Trans.Name)" class="waves-effect waves-primary">
+                        <i class="menu-icon glyphicon glyphicon-list-alt"></i> <span> فرم ثبت هزینه ها </span>
+                    </a>
+                </li>
+
+                <li class="has_sub">
+                    <a href="@Url.Action(MVC.Trans.ActionNames.SendTrans, MVC.Trans.Name)" class="waves-effect waves-primary">
+                        <i class="menu-icon glyphicon glyphicon-unchecked"></i><span> هزینه های ارسال نشده </span>
+                    </a>
+                </li>
+
+                <li class="has_sub">
+                    <a href="javascript:void(0);" class="waves-effect waves-primary">
+                        <i class="menu-icon glyphicon glyphicon-check"></i> <span> هزینه های ارسال شده </span>
+                    </a>
+                </li>
+
+                <li class="has_sub">
+                    <a href="javascript:void(0);" class="waves-effect waves-primary">
+                        <i class="menu-icon fa fa-undo"></i><span> عودت هزینه ها </span>
+                    </a>
+                </li>
+
+                <li class="has_sub">
+                    <a href="javascript:void(0);" class="waves-effect waves-primary">
+                        <i class="menu-icon fa fa-pencil"></i><span> کسری مدارک </span>
+                    </a>
+
+                </li>
+
+                <li class="has_sub">
+                    <a href="javascript:void(0);" class="waves-effect waves-primary">
+                        <i class="menu-icon fa fa-bar-chart"></i><span> گزارش وضعیت هزینه ها </span>
+                    </a>
+                </li>*@
+
+            <li class="has_sub">
+                <a href="javascript:void(0);" class="waves-effect waves-primary">
+                    <i class="ti-email"></i><span> پیام ها </span> <span class="menu-arrow"></span>
+                </a>
+                <ul class="list-unstyled">
+                    <li><a href="javascript:void(0);">پیام های دریافتی</a></li>
+                    <li><a href="javascript:void(0);">پیام های ارسالی</a></li>
+                    <li><a href="javascript:void(0);">پیام جدید</a></li>
+                </ul>
+            </li>
+
+            <li class="has_sub">
+                <a href="javascript:void(0);" class="waves-effect waves-primary">
+                    <i class="ti-settings"></i><span> تنظیمات </span> <span class="menu-arrow"></span>
+                </a>
+                <ul class="list-unstyled">
+                    <li><a href="javascript:void(0);">تغییر رمز عبور</a></li>
+                    <li><a href="javascript:void(0);">سال مالی</a></li>
+                </ul>
+            </li>
+        </ul>
+        <div class="clearfix"></div>
+    </div>
+    <div class="clearfix"></div>
+</div>

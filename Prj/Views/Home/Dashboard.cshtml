@@ -1,0 +1,208 @@
+﻿
+@{
+    ViewBag.Title = "داشبورد";
+}
+
+@section contents{
+    <link href="~/plugins/morris/morris.css" rel="stylesheet">
+    <link href="~/plugins/jquery-circliful/css/jquery.circliful.css" rel="stylesheet"/>
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="page-title-box">
+            @*<ol class="breadcrumb pull-right">
+                    <li><a href="#">Minton</a></li>
+                    <li class="active">Dashboard</li>
+                </ol>*@
+            <h4 class="page-title">به سامانه ی کارگزاری رسمی بیمه ی فنون تدبیر اقتصاد خوش آمدید !</h4>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-6 col-lg-3">
+        <div class="widget-simple-chart text-right card-box">
+            <div class="circliful-chart" data-dimension="90" data-text="87%" data-width="5" data-fontsize="14" data-percent="87" data-fgcolor="#5fbeaa" data-bgcolor="#ebeff2"></div>
+            <h3 class="text-success counter">2562</h3>
+            <p class="text-muted">تعداد کل هزینه های ارسال شده</p>
+        </div>
+    </div>
+
+    <div class="col-sm-6 col-lg-3">
+        <div class="widget-simple-chart text-right card-box">
+            <div class="circliful-chart" data-dimension="90" data-text="37%" data-width="5" data-fontsize="14" data-percent="37" data-fgcolor="#3bafda" data-bgcolor="#ebeff2"></div>
+            <h3 class="text-primary counter">685</h3>
+            <p class="text-muted ">هزینه های در دست بررسی</p>
+        </div>
+    </div>
+
+    <div class="col-sm-6 col-lg-3">
+        <div class="widget-simple-chart text-right card-box">
+            <div class="circliful-chart" data-dimension="90" data-text="53%" data-width="5" data-fontsize="14" data-percent="53" data-fgcolor="#f76397" data-bgcolor="#ebeff2"></div>
+            <h3 class="text-primary counter">759</h3>
+            <p class="text-muted">هزینه های برگشتی</p>
+        </div>
+    </div>
+
+    <div class="col-sm-6 col-lg-3">
+        <div class="widget-simple-chart text-right card-box">
+            <div class="circliful-chart" data-dimension="90" data-text="69%" data-width="5" data-fontsize="14" data-percent="69" data-fgcolor="#98a6ad" data-bgcolor="#ebeff2"></div>
+            <h3 class="text-inverse counter">1025</h3>
+            <p class="text-muted">هزینه های پرداخت شده</p>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card-box">
+            <h4 class="text-dark  header-title m-t-0">آخرین هزینه های ارسال شده</h4>
+                <p class="text-muted m-b-25 font-13">
+                    @*Your awesome text goes here.*@
+                </p>
+
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>نام بیمه شده</th>
+                            <th>نوع هزینه</th>
+                            <th>مبلغ هزینه</th>
+                            <th>وضعیت</th>
+                            <th>نام شرکت</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="farsi-digit">1</td>
+                            <td>زهرا موحدی</td>
+                            <td>دارو</td>
+                            <td class="farsi-digit">550,000</td>
+                            <td><span class="label label-warning">عودت</span></td>
+                            <td>توسعه ی سرآمد</td>
+                        </tr>
+                        <tr>
+                            <td class="farsi-digit">2</td>
+                            <td>فاطیما فرهانی</td>
+                            <td>ویزیت</td>
+                            <td class="farsi-digit">430,000</td>
+                            <td><span class="label label-success">ارسال شده</span></td>
+                            <td>سرمایه گذاری مسکن</td>
+                        </tr>
+                        <tr>
+                            <td class="farsi-digit">3</td>
+                            <td>مریم رضایی</td>
+                            <td>سونوگرافی</td>
+                            <td class="farsi-digit">1,280,000</td>
+                            <td><span class="label label-pink">کسری مدارک</span></td>
+                            <td>فنون تدبیر</td>
+                        </tr>
+                        <tr>
+                            <td class="farsi-digit">4</td>
+                            <td>علی رحمانی</td>
+                            <td>رادویولوژی</td>
+                            <td class="farsi-digit">860,000</td>
+                            <td>
+                                <span class="label label-primary">در دست بررسی</span>
+                            </td>
+                            <td>سرمایه گذاری</td>
+                        </tr>
+                        <tr>
+                            <td class="farsi-digit">5</td>
+                            <td>حسین مقدم</td>
+                            <td>عینک</td>
+                            <td class="farsi-digit">2,560,000</td>
+                            <td><span class="label label-success">ارسال شده</span></td>
+                            <td>فنون تدبیر</td>
+                        </tr>
+
+                        <tr>
+                            <td class="farsi-digit">6</td>
+                            <td>نگین محمدزاده</td>
+                            <td>پرستاری در منزل</td>
+                            <td class="farsi-digit">700,000</td>
+                            <td><span class="label label-purple">واحد پرداخت</span></td>
+                            <td>توسعه سرآمد</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- end col -8 -->
+
+    @*<div class="col-lg-4">
+        <div class="card-box widget-user">
+            <div>
+                <img src="assets/images/users/avatar-1.jpg" class="img-responsive img-circle" alt="user">
+                <div class="wid-u-info">
+                    <h4 class="m-t-0 m-b-5">Chadengle</h4>
+                    <p class="text-muted m-b-5 font-13">coderthemes@gmail.com</p>
+                    <small class="text-warning"><b>Admin</b></small>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-box widget-user">
+            <div>
+                <img src="assets/images/users/avatar-2.jpg" class="img-responsive img-circle" alt="user">
+                <div class="wid-u-info">
+                    <h4 class="m-t-0 m-b-5">Tomaslau</h4>
+                    <p class="text-muted m-b-5 font-13">coderthemes@gmail.com</p>
+                    <small class="text-success"><b>User</b></small>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-box widget-user">
+            <div>
+                <img src="assets/images/users/avatar-7.jpg" class="img-responsive img-circle" alt="user">
+                <div class="wid-u-info">
+                    <h4 class="m-t-0 m-b-5">Ok</h4>
+                    <p class="text-muted m-b-5 font-13">coderthemes@gmail.com</p>
+                    <small class="text-pink"><b>Admin</b></small>
+                </div>
+            </div>
+        </div>
+
+    </div>*@
+
+</div>
+
+@section scripts{
+    <!-- Counter Up  -->
+    <script src="~/plugins/waypoints/lib/jquery.waypoints.js"></script>
+    <script src="~/plugins/counterup/jquery.counterup.min.js"></script>
+
+    <!--Morris Chart-->
+    <script src="~/plugins/morris/morris.min.js"></script>
+    <script src="~/plugins/raphael/raphael-min.js"></script>
+
+    <!-- Page js  -->
+    @*<script src="~/Scripts/pages/jquery.dashboard.js"></script>*@
+
+    <!-- circliful Chart -->
+    <script src="~/plugins/jquery-circliful/js/jquery.circliful.min.js"></script>
+    <script src="~/plugins/jquery-sparkline/jquery.sparkline.min.js"></script>
+
+    <!-- Custom main Js -->
+    <script src="~/Scripts/jquery.core.js"></script>
+    <script src="~/Scripts/jquery.app.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function ($) {
+
+            jQuery(document).ready(function ($) {
+                $('.counter').counterUp({
+                    delay: 100,
+                    time: 1200
+                });
+                $('.circliful-chart').circliful();
+            });
+        });
+    </script>
+}
+
