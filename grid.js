@@ -8,7 +8,7 @@ function PSCO_grid(name) {
     this.RightToLeft = true;
     this.type = undefined;
     this.button = undefined; // [{name: "" , type:'none' , attribute:[{name , value}] , ClassName:""}]
-    this.cols = undefined; // [{name:"" , type : "" , hidden : 'true' , sortBy: 'true' , slect : 'true'  , searchMode : 'select'}]    ---> search Mode for input type and create search on hidden Cols
+    this.cols = undefined; // [{name:"" ,mainid:"", type : "" , hidden : 'true' , sortBy: 'true' , slect : 'true'  , searchMode : 'select'}]    ---> search Mode for input type and create search on hidden Cols ---> mainid for select or input that have hidden value for search and sort ...
     this.actions = undefined; // [{name: "" , type:'none' , attribute:[{name , value}] , ClassName:""}]
     this.rows = undefined; //[{name: "" , value:"" , type :"" }]
     this.searchResultData = undefined; //[{name: "" , value:"" , type :"" }]
@@ -160,8 +160,6 @@ function PSCO_grid(name) {
                     formGP = document.createElement('div');
                     formGP.setAttribute('class', 'form-group');
 
-                    label = document.createElement('label');
-                    label.setAttribute('for', this.cols[i].name);
 
                     p = document.createElement('p');
                     if (this.cols[i].thname != undefined) {
@@ -172,7 +170,7 @@ function PSCO_grid(name) {
 
                     inputCheck = document.createElement('input');
                     inputCheck.setAttribute('type', 'checkbox');
-                    inputCheck.setAttribute('data-id', this.cols[i].name); //___set input Id
+
                     inputCheck.setAttribute('class', 'checkbox form-control');
 
                     if (this.cols[i].searchMode == 'select') {
@@ -184,17 +182,29 @@ function PSCO_grid(name) {
                         inputText = document.createElement('input');
                         inputText.setAttribute('type', 'text');
                         inputText.setAttribute('onchange', 'check(this)');
-                        try{
+                        try {
                             if (this.cols[i].searchMode.toLowerCase() == 'datepicker' && this.DatePickerFunc != undefined) {
-                                inputText.setAttribute('onclick' , this.DatePickerFunc);
+                                inputText.setAttribute('onclick', this.DatePickerFunc);
                             }
-                        }catch(err){}
+                        } catch (err) { }
 
                         inputText.setAttribute('placeholder', this.cols[i].thname);
                     }
 
                     inputText.setAttribute('class', 'form-control');
-                    inputText.setAttribute('id', this.cols[i].name);
+                    //___ set Ids and label
+
+                    label = document.createElement('label');
+
+                    if (this.cols[i].mainid != undefined && this.cols[i].mainid != null) {
+                        inputText.setAttribute('id', this.cols[i].mainid);
+                        label.setAttribute('for', this.cols[i].mainid);
+                        inputCheck.setAttribute('data-id', this.cols[i].mainid); //___set input Id
+                    } else {
+                        inputText.setAttribute('id', this.cols[i].name);
+                        label.setAttribute('for', this.cols[i].name);
+                        inputCheck.setAttribute('data-id', this.cols[i].name); //___set input Id
+                    }
 
                     //____ append
                     label.appendChild(p);
@@ -604,7 +614,7 @@ function PSCO_grid(name) {
     };
 
     //______ for ServerSide paging
-    this.create_otherPageRows = function (data, className) {
+    this.create_otherPageRows = function (data,searchBtnDividerId) {
         var Tbody = document.querySelectorAll('#' + this.ContainerID + '_table > tbody'); // ____ get Tbody
         Tbody[0].innerHTML = '';
         this.data = data;
@@ -620,6 +630,7 @@ function PSCO_grid(name) {
             }
             Tbody[0].appendChild(tr);
         }
+        this.createPaging(this.serverPaging , searchBtnDividerId);
 
     }
 
@@ -640,7 +651,12 @@ function PSCO_grid(name) {
             BtnDivider = document.createElement('div');
             BtnDivider.setAttribute('class', 'panel-footer page-divider pull-right');
             BtnDivider.setAttribute('id', this.name + '_PageBtnDivider');
-        } else {
+        } else if (btnDividerId == 'default')
+        {
+            BtnDivider = document.getElementById(this.name + '_PageBtnDivider'); //____ for pageing in search Mode
+            BtnDivider.innerHTML = '';
+        }
+        else {
             BtnDivider = document.getElementById(btnDividerId); //____ for pageing in search Mode
             BtnDivider.innerHTML = '';
         }

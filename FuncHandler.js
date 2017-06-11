@@ -75,7 +75,7 @@ Trans.transEntry.setGrid = function () {
     Trans.transEntry.grid.RowIDName = 'TransId';
     Trans.transEntry.grid.cols = [
         { name: 'id', thname: 'شناسه', hidden: true },
-        { name: 'CompanyName', thname: 'نام شرکت', hidden: true, searchMode: 'select' },
+        { name: 'CompanyName', thname: 'نام شرکت', hidden: true, searchMode: 'select', mainid: 'CompanyInsuranceId' },
         { name: 'Description', thname: 'توضیحات', hidden: true },
         { name: 'FileNumber', hidden: true },
         { name: 'FormattedTransAmount', hidden: true },
@@ -92,10 +92,10 @@ Trans.transEntry.setGrid = function () {
         { name: 'RelationTitle', thname: 'نسبت', hidden: false, type: '' },
         { name: 'RowNumber', hidden: true },
         { name: 'TariffCategoryId', hidden: true },
-        { name: 'TariffCategoryTitle', thname: '????', hidden: false, type: 'text' },
+        { name: 'TariffCategoryTitle', thname: 'نوع هزینه', hidden: false, searchMode: 'select', mainid: 'TariffCategoryId' },
         { name: 'TransAmount', thname: 'مبلغ', hidden: false, type: 'text' },
         { name: 'TransDate', hidden: true },
-        { name: 'TransDateFa', thname: 'تاریخ', hidden: false, searchMode: 'datepicker' },
+        { name: 'TransDateFa', thname: 'تاریخ', hidden: false, searchMode: 'datepicker', mainid: 'TransDate' },
         { name: 'TransId', hidden: true }
     ];
 
@@ -134,14 +134,14 @@ Trans.transEntry.setPagingData = function (data) {
 //_______ search Func
 Trans.transEntry.setSearchingData = function (data) {
     Trans.transEntry.grid.serverPaging = data.TotalCount;
-    Trans.transEntry.grid.create_otherPageRows(data.Items);
+    Trans.transEntry.grid.create_otherPageRows(data.Items , 'default');
 }
 // ______ set Grid Data
 Trans.transEntry.SetGridData = function (data) {
     Trans.transEntry.grid.data = data.Items;
     Trans.transEntry.grid.serverPaging = data.TotalCount;
     Trans.transEntry.grid.render();
-    fillSelect('CompanyName', company, SelectedCompanyID);
+    fillSelect('CompanyInsuranceId', company, SelectedCompanyID);
 }
 //______ DeleteTrans
 Trans.transEntry.deleteIt = function (elem) {
